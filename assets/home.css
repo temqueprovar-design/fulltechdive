@@ -136,3 +136,15 @@
   .slide{transition:none}
   .bubble{display:none}
 }
+
+/* ---------- celular: profundímetro lateral e foto do produto em cima ---------- */
+.depth{display:block}
+.depth__pill{display:none!important}
+@media (max-width:759px){
+  .depth{right:5px;height:min(44vh,340px)}
+  .depth__marker{font-size:.78rem;padding:2px 6px}
+}
+@media (max-width:979px){
+  .slide__media{order:-1}
+  .porthole{width:min(74%,320px);margin:6px auto 4px}
+}
