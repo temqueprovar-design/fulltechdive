@@ -20,8 +20,10 @@ if (heroRoot && SLIDES.length) {
     const specs = el('ul', 'specs3');
     s.specs.forEach(sp => {
       const li = el('li');
-      const v = el('strong', null, sp.value);
-      v.appendChild(el('small', null, sp.unit));
+      const v = el('strong');
+      const num = el('span', 'num', sp.value);
+      num.dataset.val = sp.value;
+      v.append(num, el('small', null, sp.unit));
       li.append(v, el('span', null, sp.label));
       specs.appendChild(li);
     });
@@ -54,6 +56,22 @@ if (heroRoot && SLIDES.length) {
     return d;
   });
 
+  // contagem do display: sobe de 0 até o valor, como um instrumento ligando
+  function countUp(slide) {
+    slide.querySelectorAll('.num').forEach(n => {
+      const target = parseInt(n.dataset.val, 10);
+      if (reduced || isNaN(target)) { n.textContent = n.dataset.val; return; }
+      const t0 = performance.now();
+      const tick = now => {
+        const p = Math.min(1, (now - t0) / 900);
+        n.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1 && slide.classList.contains('on')) requestAnimationFrame(tick);
+        else n.textContent = n.dataset.val;
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
   function go(i) {
     cur = (i + SLIDES.length) % SLIDES.length;
     slideEls.forEach((s, k) => {
@@ -63,6 +81,7 @@ if (heroRoot && SLIDES.length) {
       s.inert = !on;
     });
     dotEls.forEach((d, k) => d.setAttribute('aria-current', String(k === cur)));
+    countUp(slideEls[cur]);
   }
 
   function ctrlBtn(label, glyph, step) {

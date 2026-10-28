@@ -31,8 +31,10 @@ const docUrl = c => DOCS + encodeURIComponent(c.file);
 
 // ---------- Cabeçalho e rodapé (iguais em todas as páginas) ----------
 function logo(small) {
-  const m = el('span', 'logo__mark' + (small ? ' logo__mark--sm' : ''), 'FULL TECH');
-  m.appendChild(el('small', null, 'DIVE'));
+  const m = el('span', 'logo__mark' + (small ? ' logo__mark--sm' : ''));
+  const sub = el('span', 'logo__sub');
+  sub.append(el('span', 'logo__yr', 'SINCE 1998'), el('span', 'logo__dv', 'DIVE'));
+  m.append(el('span', 'logo__t', 'FULL TECH'), sub);
   return m;
 }
 
@@ -49,7 +51,7 @@ function renderChrome() {
 
   const brand = link('index.html', 'logo');
   brand.setAttribute('aria-label', 'Full Tech Dive - início');
-  brand.append(logo(false), el('span', 'logo__since', 'SINCE 1998'));
+  brand.appendChild(logo(false));
 
   const nav = el('nav', 'nav');
   nav.id = 'nav';

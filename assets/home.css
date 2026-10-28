@@ -28,13 +28,21 @@
 .slide h1{color:#fff;font-size:clamp(2.2rem,7.5vw,3.9rem);text-wrap:balance}
 .slide .lead{color:#a9c9d4;margin:16px 0 22px;max-width:46ch}
 
-.specs3{display:grid;grid-template-columns:repeat(3,1fr);margin:6px 0 26px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(3,20,31,.45);backdrop-filter:blur(4px)}
-.specs3 li{padding:14px 12px;border-right:1px solid rgba(255,255,255,.1)}
-.specs3 li:last-child{border-right:0}
-.specs3 strong{display:block;font-family:var(--f-head);font-size:clamp(1.9rem,6vw,2.8rem);line-height:1;color:var(--yellow);font-weight:800}
-.specs3 strong small{font-size:.5em;font-weight:600;color:#fff;margin-left:4px;letter-spacing:.04em}
-.specs3 span{display:block;margin-top:4px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#8db3c0}
-
+/* display digital de equipamento */
+.specs3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:6px 0 28px;padding:10px;border-radius:16px;
+  background:linear-gradient(180deg,#22343e,#0d171d);border:1px solid #3d525e;
+  box-shadow:0 0 0 3px #091218,0 0 0 4px #4f6877,0 20px 34px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.14)}
+.specs3 li{position:relative;display:flex;flex-direction:column;gap:4px;padding:11px 10px 10px;border-radius:9px;overflow:hidden;
+  background:radial-gradient(130% 150% at 28% 0%,#10424c 0%,#061c23 68%);
+  border:1px solid #02090c;box-shadow:inset 0 0 20px rgba(0,0,0,.75),inset 0 0 0 1px rgba(70,194,207,.2)}
+.specs3 li::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 3px)}
+.specs3 li::after{content:"";position:absolute;left:-20%;top:-70%;width:140%;height:100%;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent);transform:rotate(-7deg)}
+.specs3 li>span{order:-1;display:block;font-family:'Share Tech Mono',ui-monospace,monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#6fd1dc;opacity:.85;line-height:1.3;min-height:2.6em}
+.specs3 li>span::before{content:"";display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:#2fd36b;box-shadow:0 0 7px #2fd36b;vertical-align:1px;animation:blink 2.6s steps(1) infinite}
+.specs3 strong{display:flex;align-items:baseline;gap:6px;white-space:nowrap;font-family:'Orbitron',ui-monospace,monospace;font-weight:700;font-size:clamp(1.35rem,5vw,2.25rem);line-height:1.15;color:#82f7ff;
+  font-variant-numeric:tabular-nums;text-shadow:0 0 5px rgba(80,225,240,.9),0 0 18px rgba(70,220,235,.5)}
+.specs3 strong small{font-family:'Share Tech Mono',ui-monospace,monospace;font-weight:400;font-size:.38em;letter-spacing:.04em;color:#ffcf40;text-shadow:0 0 6px rgba(255,200,60,.7)}
+@keyframes blink{0%,86%{opacity:1}87%,100%{opacity:.25}}
 .slide__btns{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 
 /* janela de escotilha */
