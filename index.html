@@ -10,31 +10,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/home.css">
 </head>
 <body data-page="home">
 
 <div id="site-header"></div>
 
 <main>
-  <section class="hero">
-    <div class="wrap hero__in">
-      <div class="hero__text">
-        <p class="eyebrow">Mergulho comercial e subsea</p>
-        <h1>Equipamentos para quem trabalha <span>debaixo d'água.</span></h1>
-        <p class="lead">Um portfólio completo para operações de mergulho e projetos exclusivos feitos sob medida.</p>
-        <div class="hero__btns">
-          <a class="btn btn--primary" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
-          <a class="btn btn--ghost" href="produtos.html">Ver produtos</a>
-        </div>
-        <small class="hero__size" data-latest-size></small>
-      </div>
-      <div class="hero__media">
-        <img class="hero__img" src="assets/img/produtos/unidadeshidraulicas02.jpg" alt="Unidade hidráulica Full Tech" width="500" height="300">
-      </div>
+  <!-- HERO: carrossel de produtos (slides em assets/data/hero.js) -->
+  <section class="hero2">
+    <div class="wrap">
+      <div id="hero-slider" aria-roledescription="carousel" aria-label="Produtos em destaque"></div>
     </div>
   </section>
 
-  <section class="sec">
+  <!-- LINHAS EM DESTAQUE -->
+  <section class="sec sec--cats">
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V40C160 6 320 4 520 34S900 76 1100 48 1340 14 1440 34V80Z"/></svg>
     <div class="wrap">
       <header class="sec__head sec__head--row">
         <div>
@@ -47,7 +39,9 @@
     </div>
   </section>
 
+  <!-- CATÁLOGO -->
   <section class="sec sec--navy">
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V30C220 74 420 76 640 44S1060 -6 1240 22 1380 50 1440 40V80Z"/></svg>
     <div class="wrap catband">
       <div class="catband__cover"><img src="assets/img/site/catalogoft.jpg" alt="Capa do catálogo Full Tech" loading="lazy"></div>
       <div>
@@ -55,15 +49,17 @@
         <h2>Todos os equipamentos em PDF</h2>
         <p>Baixe o catálogo completo com as especificações técnicas de cada linha de produtos.</p>
         <div class="catband__btns">
-          <a class="btn btn--primary" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
-          <a class="btn btn--light" href="catalogos.html">Ver todos os catálogos</a>
+          <a class="btn btn--machine" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
+          <a class="btn btn--steel" href="catalogos.html">Ver todos os catálogos</a>
           <small data-latest-size></small>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- DIFERENCIAIS -->
   <section class="sec">
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V36C200 8 380 10 600 40S980 74 1180 44 1380 12 1440 28V80Z"/></svg>
     <div class="wrap feats">
       <article class="feat">
         <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14l18-8 18 8-18 8-18-8z"/><path d="M6 24l18 8 18-8"/><path d="M6 34l18 8 18-8"/></svg>
@@ -83,7 +79,9 @@
     </div>
   </section>
 
+  <!-- MARCAS -->
   <section class="sec sec--gray">
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V44C240 78 440 74 700 40S1100 -2 1440 36V80Z"/></svg>
     <div class="wrap">
       <header class="sec__head">
         <p class="eyebrow">Fabricantes</p>
@@ -99,15 +97,17 @@
     </div>
   </section>
 
-  <section class="sec">
+  <!-- CHAMADA FINAL -->
+  <section class="sec sec--cta">
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V30C180 70 360 74 580 44S960 -4 1160 24 1380 54 1440 40V80Z"/></svg>
     <div class="wrap cta">
       <div>
         <h2>Precisa de um equipamento ou projeto sob medida?</h2>
         <p class="lead">Fale com a gente e receba um orçamento.</p>
       </div>
       <div class="cta__btns">
-        <a class="btn btn--primary" href="contato.html">Pedir orçamento</a>
-        <a class="btn btn--whats" href="https://wa.me/5521988350209" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn--machine" href="contato.html">Pedir orçamento</a>
+        <a class="btn btn--steel" href="https://wa.me/5521988350209" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
   </section>
@@ -117,6 +117,8 @@
 
 <script src="assets/data/products.js"></script>
 <script src="assets/data/catalogos.js"></script>
+<script src="assets/data/hero.js"></script>
 <script src="assets/main.js"></script>
+<script src="assets/home.js"></script>
 </body>
 </html>

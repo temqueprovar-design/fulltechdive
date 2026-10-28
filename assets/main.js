@@ -86,6 +86,7 @@ function renderChrome() {
 
   const c1 = el('div');
   c1.append(logo(true), el('p', 'footer__about', 'Equipamentos para mergulho comercial e subsea.'));
+  c1.appendChild(link('catalogos.html', 'btn btn--machine', 'Baixar catálogos'));
 
   const c2 = el('div');
   c2.appendChild(el('h4', null, 'Navegação'));
@@ -105,11 +106,31 @@ function renderChrome() {
   f.append(c1, c2, c3);
   const copy = el('div', 'wrap footer__copy', '© ' + new Date().getFullYear() + ' Full Tech Dive. Todos os direitos reservados.');
   footer.append(f, copy);
+  footer.insertAdjacentHTML('afterbegin',
+    '<svg class="footer__wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">' +
+    '<path d="M0 0H1440V30C1260 70 1080 74 900 46S540 -6 360 18 90 66 0 50Z"/></svg>');
   document.getElementById('site-footer').replaceWith(footer);
+  addBubbles(footer);
 
   const fab = link('https://wa.me/5521988350209', 'whats-fab', 'WhatsApp', true);
   fab.setAttribute('aria-label', 'WhatsApp');
   document.body.appendChild(fab);
+}
+
+// bolhas subindo no rodapé (sutil; desligado para quem pede menos movimento)
+function addBubbles(footer) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  for (let i = 0; i < 16; i++) {
+    const b = el('span', 'bubble');
+    const s = 6 + Math.random() * 16;
+    b.style.cssText =
+      'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random() * 100) + '%;' +
+      '--dx:' + (Math.random() * 60 - 30) + 'px;' +
+      'animation-duration:' + (9 + Math.random() * 9) + 's;' +
+      'animation-delay:-' + (Math.random() * 14) + 's';
+    b.setAttribute('aria-hidden', 'true');
+    footer.appendChild(b);
+  }
 }
 
 renderChrome();

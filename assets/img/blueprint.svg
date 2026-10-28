@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- eixos -->
+  <g stroke-dasharray="14 6 2 6" opacity=".9">
+    <path d="M60 300H860"/>
+    <path d="M450 40V560"/>
+  </g>
+  <!-- engrenagem grande -->
+  <circle cx="450" cy="300" r="190"/>
+  <circle cx="450" cy="300" r="165" stroke-dasharray="3 7"/>
+  <circle cx="450" cy="300" r="110"/>
+  <circle cx="450" cy="300" r="46"/>
+  <circle cx="450" cy="300" r="14"/>
+  <g>
+    <path d="M450 110v-26M450 490v26M260 300h-26M640 300h26"/>
+    <path d="M315 165l-18-18M585 435l18 18M315 435l-18 18M585 165l18-18"/>
+  </g>
+  <!-- peça explodida (esquerda) -->
+  <g>
+    <rect x="70" y="236" width="86" height="128" rx="8"/>
+    <rect x="96" y="262" width="34" height="76" rx="4"/>
+    <circle cx="113" cy="300" r="10"/>
+    <path d="M156 268h58M156 332h58" stroke-dasharray="4 5"/>
+    <rect x="214" y="256" width="52" height="88" rx="6"/>
+    <path d="M266 280h40M266 320h40" stroke-dasharray="4 5"/>
+  </g>
+  <!-- peça explodida (direita) -->
+  <g>
+    <path d="M644 300h44" stroke-dasharray="4 5"/>
+    <rect x="688" y="260" width="64" height="80" rx="6"/>
+    <path d="M752 285h34M752 315h34" stroke-dasharray="4 5"/>
+    <circle cx="824" cy="300" r="38"/>
+    <circle cx="824" cy="300" r="20"/>
+    <path d="M824 262v-26M824 338v26" stroke-dasharray="4 5"/>
+  </g>
+  <!-- parafusos hexagonais -->
+  <g>
+    <path d="M190 120l20-12 20 12v24l-20 12-20-12z"/><circle cx="210" cy="132" r="7"/>
+    <path d="M690 450l20-12 20 12v24l-20 12-20-12z"/><circle cx="710" cy="462" r="7"/>
+  </g>
+  <!-- cotas -->
+  <g>
+    <path d="M260 560h380"/>
+    <path d="M260 552v16M640 552v16"/>
+    <path d="M272 556l-12 4 12 4M628 556l12 4-12 4"/>
+    <path d="M870 110v380"/>
+    <path d="M862 110h16M862 490h16"/>
+    <path d="M866 122l4-12 4 12M866 478l4 12 4-12"/>
+  </g>
+  <!-- numeração de itens -->
+  <g stroke-width="1">
+    <circle cx="150" cy="200" r="14"/><path d="M160 210l18 22"/>
+    <circle cx="600" cy="90" r="14"/><path d="M592 102l-26 40"/>
+    <circle cx="770" cy="200" r="14"/><path d="M764 212l-18 40"/>
+  </g>
+</svg>
