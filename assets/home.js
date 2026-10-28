@@ -105,8 +105,8 @@ if (heroRoot && SLIDES.length) {
   gauge.setAttribute('aria-hidden', 'true');
   const track = el('div', 'depth__track');
   gauge.appendChild(track);
-  for (let m = 0; m <= MAX; m += 20) {
-    const t = el('span', 'depth__tick', m + ' m');
+  for (let m = 0; m <= MAX; m += 10) {
+    const t = el('span', 'depth__tick' + (m % 50 === 0 ? ' depth__tick--major' : ''));
     t.style.top = (m / MAX * 100) + '%';
     gauge.appendChild(t);
   }

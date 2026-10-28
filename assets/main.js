@@ -60,7 +60,7 @@ function renderChrome() {
   });
 
   const act = el('div', 'topbar__act');
-  const cta = link('catalogos.html', 'btn btn--primary btn--sm', 'Catálogos');
+  const cta = link('catalogos.html', 'btn btn--machine btn--sm', 'Catálogos');
   if (page === 'catalogos') cta.setAttribute('aria-current', 'page');
   const burger = el('button', 'burger');
   burger.setAttribute('aria-label', 'Abrir menu');
