@@ -5,191 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Full Tech Dive | Equipamentos para mergulho profissional</title>
 <meta name="description" content="Equipamentos para mergulho comercial e subsea: unidades hidráulicas, câmaras hiperbáricas, máscaras, capacetes, ar comprimido e mais. Rio de Janeiro.">
+<link rel="icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body data-page="home">
 
-<header class="topbar" id="top">
-  <div class="wrap topbar__in">
-    <a class="logo" href="index.html" aria-label="Full Tech Dive - início">
-      <span class="logo__mark">FULL TECH<small>DIVE</small></span>
-      <span class="logo__since">SINCE 1998</span>
-    </a>
-    <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <a href="index.html">Home</a>
-      <a href="index.html#empresa">A empresa</a>
-      <a href="produtos.html">Produtos</a>
-      <a href="index.html#links">Links</a>
-      <a href="index.html#downloads">Downloads</a>
-      <a href="index.html#contato" class="nav__cta">Contato</a>
-    </nav>
-  </div>
-</header>
+<div id="site-header"></div>
 
 <main>
-  <!-- HERO -->
   <section class="hero">
     <div class="wrap hero__in">
       <div class="hero__text">
         <p class="eyebrow">Mergulho comercial e subsea</p>
         <h1>Equipamentos para quem trabalha <span>debaixo d'água.</span></h1>
-        <p class="lead">Um portfólio completo para operações de mergulho, com projetos exclusivos feitos sob medida para a sua demanda.</p>
+        <p class="lead">Um portfólio completo para operações de mergulho e projetos exclusivos feitos sob medida.</p>
         <div class="hero__btns">
-          <a class="btn btn--primary" href="index.html#contato">Pedir orçamento</a>
+          <a class="btn btn--primary" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
           <a class="btn btn--ghost" href="produtos.html">Ver produtos</a>
         </div>
+        <small class="hero__size" data-latest-size></small>
       </div>
       <div class="hero__media">
         <img class="hero__img" src="assets/img/produtos/unidadeshidraulicas02.jpg" alt="Unidade hidráulica Full Tech" width="500" height="300">
       </div>
     </div>
-    <ul class="wrap stats" id="stats">
-      <li><strong data-stat="cats">13</strong> linhas de produtos</li>
-      <li><strong data-stat="prods">55</strong> equipamentos</li>
-      <li><strong>3</strong> catálogos para download</li>
-      <li><strong>RJ</strong> atendimento em todo o Brasil</li>
-    </ul>
   </section>
 
-  <!-- PRODUTOS -->
-  <section class="sec" id="produtos">
+  <section class="sec">
     <div class="wrap">
       <header class="sec__head sec__head--row">
         <div>
           <p class="eyebrow">Produtos</p>
-          <h2>O que a gente oferece</h2>
+          <h2>Linhas em destaque</h2>
         </div>
-        <a class="link" href="produtos.html">Ver todos os produtos →</a>
+        <a class="link" href="produtos.html">Ver todas as categorias →</a>
       </header>
       <div class="cats" id="cats-grid"></div>
     </div>
   </section>
 
-  <!-- EMPRESA -->
-  <section class="sec sec--dark" id="empresa">
-    <div class="wrap about">
+  <section class="sec sec--navy">
+    <div class="wrap catband">
+      <div class="catband__cover"><img src="assets/img/site/catalogoft.jpg" alt="Capa do catálogo Full Tech" loading="lazy"></div>
       <div>
-        <p class="eyebrow">A empresa</p>
-        <h2>Soluções criadas a partir da demanda do mergulho.</h2>
-      </div>
-      <div class="about__text">
-        <p>A Full Tech foi criada a partir das demandas do mercado de mergulho. Desde o início, o objetivo foi desenvolver e fornecer equipamentos que superassem as expectativas dos clientes, não só na qualidade, mas também na eficácia das soluções propostas. Por isso, a excelência, mais do que uma busca, se tornou a marca da empresa.</p>
-        <p>Hoje a principal área de atuação é o mercado subsea e de mergulho comercial, com um portfólio completo para todas as operações. Além disso, a Full Tech oferece projetos exclusivos, feitos especialmente para cada demanda.</p>
-        <h3 class="about__sub">Serviços</h3>
-        <ul class="ticks">
-          <li><strong>Recargas:</strong> cilindros de ar, nitrox, trimix, oxigênio e argônio</li>
-          <li><strong>Locações:</strong> câmaras hiperbáricas</li>
-          <li><strong>Manutenções:</strong> máscaras e capacetes</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM -->
-  <section class="sec" id="instagram">
-    <div class="wrap">
-      <header class="sec__head sec__head--row">
-        <div>
-          <p class="eyebrow">Redes sociais</p>
-          <h2>Acompanhe no dia a dia</h2>
+        <p class="eyebrow">Catálogos</p>
+        <h2>Todos os equipamentos em PDF</h2>
+        <p>Baixe o catálogo completo com as especificações técnicas de cada linha de produtos.</p>
+        <div class="catband__btns">
+          <a class="btn btn--primary" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
+          <a class="btn btn--light" href="catalogos.html">Ver todos os catálogos</a>
+          <small data-latest-size></small>
         </div>
-        <a class="link" href="https://www.facebook.com/fulltechdive/" target="_blank" rel="noopener">Facebook →</a>
-      </header>
-      <!-- Depois: preenchido automaticamente com as 6 últimas publicações do Instagram -->
-      <div class="insta" id="insta-grid">
-        <div class="ph ph--sq"><span>Post 1</span></div>
-        <div class="ph ph--sq"><span>Post 2</span></div>
-        <div class="ph ph--sq"><span>Post 3</span></div>
-        <div class="ph ph--sq"><span>Post 4</span></div>
-        <div class="ph ph--sq"><span>Post 5</span></div>
-        <div class="ph ph--sq"><span>Post 6</span></div>
       </div>
     </div>
   </section>
 
-  <!-- LINKS + DOWNLOADS -->
-  <section class="sec sec--gray" id="links">
+  <section class="sec">
+    <div class="wrap feats">
+      <article class="feat">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14l18-8 18 8-18 8-18-8z"/><path d="M6 24l18 8 18-8"/><path d="M6 34l18 8 18-8"/></svg>
+        <h3>Portfólio completo</h3>
+        <p>Todos os equipamentos necessários para operações de mergulho, de unidades hidráulicas a câmaras hiperbáricas.</p>
+      </article>
+      <article class="feat">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 38l10-10"/><path d="M30 8a10 10 0 0 0-9 14L8 35l5 5 13-13A10 10 0 0 0 40 18l-6 6-6-2-2-6 6-6z"/></svg>
+        <h3>Projetos exclusivos</h3>
+        <p>Soluções desenvolvidas sob medida para atender a demanda específica de cada cliente.</p>
+      </article>
+      <article class="feat">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/><path d="M24 14v10l7 4"/></svg>
+        <h3>Recarga, locação e manutenção</h3>
+        <p>Recarga de cilindros, locação de câmaras hiperbáricas e manutenção de máscaras e capacetes.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec sec--gray">
     <div class="wrap">
       <header class="sec__head">
-        <p class="eyebrow">Links</p>
-        <h2>Marcas parceiras</h2>
+        <p class="eyebrow">Fabricantes</p>
+        <h2>Marcas e links úteis</h2>
       </header>
       <div class="partners">
-        <a class="partner" href="https://www.broco-rankin.com/" target="_blank" rel="noopener">
-          <img src="assets/img/site/links02.jpg" alt="" loading="lazy"><span>Broco Rankin</span>
-        </a>
-        <a class="partner" href="https://pt.caviblaster.com/" target="_blank" rel="noopener">
-          <img src="assets/img/site/links05.jpg" alt="" loading="lazy"><span>Cavi Blaster</span>
-        </a>
-        <a class="partner" href="http://www.kirbymorgan.com/products/helmets" target="_blank" rel="noopener">
-          <img src="assets/img/site/links01.jpg" alt="" loading="lazy"><span>Kirby Morgan</span>
-        </a>
-        <a class="partner" href="https://www.emerson.com/en-us/catalog/valves-actuators-regulators/regulators" target="_blank" rel="noopener">
-          <img src="assets/img/site/links04.jpg" alt="" loading="lazy"><span>Tescom</span>
-        </a>
-        <a class="partner" href="https://www.cygnus-instruments.com/us/" target="_blank" rel="noopener">
-          <img src="assets/img/site/links03.jpg" alt="" loading="lazy"><span>Cygnus</span>
-        </a>
+        <a class="partner" href="https://www.broco-rankin.com/" target="_blank" rel="noopener"><img src="assets/img/site/links02.jpg" alt="" loading="lazy"><span>Broco Rankin</span></a>
+        <a class="partner" href="https://pt.caviblaster.com/" target="_blank" rel="noopener"><img src="assets/img/site/links05.jpg" alt="" loading="lazy"><span>Cavi Blaster</span></a>
+        <a class="partner" href="http://www.kirbymorgan.com/products/helmets" target="_blank" rel="noopener"><img src="assets/img/site/links01.jpg" alt="" loading="lazy"><span>Kirby Morgan</span></a>
+        <a class="partner" href="https://www.emerson.com/en-us/catalog/valves-actuators-regulators/regulators" target="_blank" rel="noopener"><img src="assets/img/site/links04.jpg" alt="" loading="lazy"><span>Tescom</span></a>
+        <a class="partner" href="https://www.cygnus-instruments.com/us/" target="_blank" rel="noopener"><img src="assets/img/site/links03.jpg" alt="" loading="lazy"><span>Cygnus</span></a>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="downloads">
-    <div class="wrap">
-      <header class="sec__head">
-        <p class="eyebrow">Downloads</p>
-        <h2>Catálogos</h2>
-      </header>
-      <ul class="docs">
-        <li><a href="assets/docs/Catalogo FT 2021-WEB.pdf" target="_blank" rel="noopener"><img src="assets/img/site/catalogoft.jpg" alt="" loading="lazy"><span><strong>Catálogo FullTech 2021</strong><small>PDF · 7,8 MB</small></span></a></li>
-        <li><a href="assets/docs/Catalogo FT 2019-WEB.pdf" target="_blank" rel="noopener"><img src="assets/img/site/catalogoft.jpg" alt="" loading="lazy"><span><strong>Catálogo FullTech 2019</strong><small>PDF · 3,9 MB</small></span></a></li>
-        <li><a href="assets/docs/Catalogo FT 2017-WEB.pdf" target="_blank" rel="noopener"><img src="assets/img/site/catalogoft.jpg" alt="" loading="lazy"><span><strong>Catálogo FullTech 2017</strong><small>PDF · 5,7 MB</small></span></a></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CONTATO -->
-  <section class="sec sec--gray" id="contato">
-    <div class="wrap two">
+  <section class="sec">
+    <div class="wrap cta">
       <div>
-        <p class="eyebrow">Contato</p>
-        <h2>Entre em contato conosco</h2>
-        <p>Conte o que você precisa e responderemos o mais rápido possível.</p>
-        <ul class="contact">
-          <li><strong>Endereço</strong>Rua Latino Coelho, 22ª — Penha<br>Rio de Janeiro - RJ · CEP 21070-720</li>
-          <li><strong>Telefone</strong><a href="tel:+552122707847">(21) 2270-7847</a></li>
-          <li><strong>Celular / WhatsApp</strong><a href="tel:+5521988350209">(21) 98835-0209</a></li>
-          <li><strong>E-mail</strong><a href="mailto:contato@fulltechdive.com.br">contato@fulltechdive.com.br</a></li>
-        </ul>
-        <a class="btn btn--whats" href="https://wa.me/5521988350209" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <h2>Precisa de um equipamento ou projeto sob medida?</h2>
+        <p class="lead">Fale com a gente e receba um orçamento.</p>
       </div>
-      <!-- Temporário: abre o e-mail do visitante. Depois trocar por envio via servidor. -->
-      <form class="form" id="form-contato">
-        <label>Nome<input name="nome" required autocomplete="name"></label>
-        <label>E-mail<input type="email" name="email" required autocomplete="email"></label>
-        <label>Mensagem<textarea name="msg" rows="4" required></textarea></label>
-        <button class="btn btn--primary" type="submit">Enviar</button>
-      </form>
+      <div class="cta__btns">
+        <a class="btn btn--primary" href="contato.html">Pedir orçamento</a>
+        <a class="btn btn--whats" href="https://wa.me/5521988350209" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer__in">
-    <span class="logo__mark logo__mark--sm">FULL TECH<small>DIVE</small></span>
-    <p>Rua Latino Coelho, 22ª · Penha · Rio de Janeiro - RJ · (21) 2270-7847<br>© <span id="ano"></span> Full Tech Dive. Todos os direitos reservados.</p>
-  </div>
-</footer>
-
-<a class="whats-fab" href="https://wa.me/5521988350209" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+<div id="site-footer"></div>
 
 <script src="assets/data/products.js"></script>
+<script src="assets/data/catalogos.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

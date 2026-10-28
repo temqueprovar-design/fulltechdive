@@ -4,45 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Produtos | Full Tech Dive</title>
-<meta name="description" content="Catálogo de produtos Full Tech Dive: unidades hidráulicas, ferramentas, ar comprimido, máscaras e capacetes, câmaras hiperbáricas e mais.">
+<meta name="description" content="Produtos Full Tech Dive: unidades hidráulicas, ferramentas, ar comprimido, máscaras e capacetes, câmaras hiperbáricas e mais.">
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
+<body data-page="produtos">
 
-<header class="topbar" id="top">
-  <div class="wrap topbar__in">
-    <a class="logo" href="index.html" aria-label="Full Tech Dive - início">
-      <span class="logo__mark">FULL TECH<small>DIVE</small></span>
-      <span class="logo__since">SINCE 1998</span>
-    </a>
-    <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <a href="index.html">Home</a>
-      <a href="index.html#empresa">A empresa</a>
-      <a href="produtos.html" aria-current="page">Produtos</a>
-      <a href="index.html#links">Links</a>
-      <a href="index.html#downloads">Downloads</a>
-      <a href="index.html#contato" class="nav__cta">Contato</a>
-    </nav>
-  </div>
-</header>
+<div id="site-header"></div>
 
 <main>
   <section class="pagehead">
-    <div class="wrap">
-      <p class="eyebrow">Produtos</p>
-      <h1 id="cat-title">Nossos produtos</h1>
-      <p class="lead" id="cat-count"></p>
+    <div class="wrap pagehead__row">
+      <div>
+        <p class="eyebrow">Produtos</p>
+        <h1 id="cat-title">Nossos produtos</h1>
+        <p class="lead" id="cat-count"></p>
+      </div>
+      <a class="btn btn--ghost" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
     </div>
   </section>
 
-  <section class="sec sec--tight">
+  <section class="sec--tight">
     <div class="wrap">
       <nav class="chips" id="chips" aria-label="Categorias"></nav>
       <div class="products" id="products"></div>
@@ -51,22 +36,16 @@
           <h3>Não achou o que procura?</h3>
           <p>A Full Tech também desenvolve projetos exclusivos sob demanda.</p>
         </div>
-        <a class="btn btn--primary" href="index.html#contato">Fale com a gente</a>
+        <a class="btn btn--primary" href="contato.html">Fale com a gente</a>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer__in">
-    <span class="logo__mark logo__mark--sm">FULL TECH<small>DIVE</small></span>
-    <p>Rua Latino Coelho, 22ª · Penha · Rio de Janeiro - RJ · (21) 2270-7847<br>© <span id="ano"></span> Full Tech Dive. Todos os direitos reservados.</p>
-  </div>
-</footer>
-
-<a class="whats-fab" href="https://wa.me/5521988350209" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
+<div id="site-footer"></div>
 
 <script src="assets/data/products.js"></script>
+<script src="assets/data/catalogos.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>
