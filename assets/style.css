@@ -133,3 +133,74 @@ h3{font-size:1.5rem;font-weight:700;text-transform:uppercase}
   .sec{padding:92px 0}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- conteúdo real ---------- */
+.hero__img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:78% 50%;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.nav a[aria-current="page"]{color:var(--yellow-d)}
+
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.cat{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;background:#fff;transition:.2s}
+.cat:hover{box-shadow:0 12px 30px rgba(0,0,0,.08);transform:translateY(-2px);border-color:var(--yellow)}
+.cat img{width:100%;aspect-ratio:5/3;object-fit:cover;object-position:85% 50%;background:#fff;border-bottom:1px solid var(--line)}
+.cat h3{font-size:1.15rem;padding:12px 14px 0}
+.cat__n{padding:2px 14px 14px;font-size:.8rem;color:var(--muted)}
+
+.about__text p+p{margin-top:14px}
+.about__sub{color:#fff;font-size:1.3rem;margin:26px 0 4px}
+.ticks strong{color:var(--yellow)}
+
+.partners{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.partner{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;transition:.2s}
+.partner:hover{border-color:var(--yellow);transform:translateY(-2px)}
+.partner img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.partner span{padding:12px 14px;font-weight:600}
+
+.docs{display:grid;gap:14px}
+.docs a{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:var(--radius);padding:14px;text-decoration:none;transition:.2s}
+.docs a:hover{border-color:var(--yellow);background:#fffbea}
+.docs img{width:84px;height:84px;object-fit:cover;border-radius:10px;flex:none}
+.docs strong{display:block}
+.docs small{color:var(--muted)}
+
+.contact{margin:20px 0}
+.contact li{padding:10px 0;border-bottom:1px solid var(--line)}
+.contact strong{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.contact a{text-decoration:none;font-weight:500}
+.contact a:hover{color:var(--yellow-d)}
+
+/* página de produtos */
+.pagehead{background:linear-gradient(180deg,#fff,var(--bg-2));padding:40px 0 28px;border-bottom:1px solid var(--line)}
+.pagehead .lead{margin:10px 0 0}
+.sec--tight{padding:28px 0 64px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;margin-bottom:18px;scrollbar-width:thin;position:sticky;top:64px;z-index:20;background:#fff}
+.chip{flex:none;padding:9px 16px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-size:.88rem;font-weight:500;white-space:nowrap;transition:.2s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.products{display:grid;gap:18px}
+.pcard{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.pcard__img{background:#fff;border-bottom:1px solid var(--line)}
+.pcard__img img{width:100%;aspect-ratio:5/3;object-fit:contain}
+.pcard__body{padding:18px;display:flex;flex-direction:column;flex:1;align-items:flex-start}
+.pcard__body h3{font-size:1.35rem}
+.pcard__body .specs{margin:10px 0 16px;width:100%}
+.pcard__body .link{margin-top:auto}
+.more{width:100%;margin:10px 0 16px}
+.more summary{cursor:pointer;font-weight:600;font-size:.9rem;padding:8px 0;color:var(--ink)}
+.more .specs{margin-top:4px}
+
+.cta-box{margin-top:44px;padding:26px;background:var(--ink);color:#c9ced6;border-radius:var(--radius);display:grid;gap:16px;align-items:center}
+.cta-box h3{color:#fff;font-size:1.6rem}
+
+@media (min-width:760px){
+  .cats{grid-template-columns:repeat(3,1fr)}
+  .partners{grid-template-columns:repeat(5,1fr)}
+  .docs{grid-template-columns:repeat(3,1fr)}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .cta-box{grid-template-columns:1fr auto}
+}
+@media (min-width:980px){
+  .cats{grid-template-columns:repeat(4,1fr)}
+  .products{grid-template-columns:repeat(3,1fr)}
+  .chips{top:64px}
+}
