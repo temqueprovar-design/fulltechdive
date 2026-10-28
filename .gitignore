@@ -1,0 +1,10 @@
+﻿# Credenciais e configs locais: nunca versionar
+.env
+*.env
+config.local.*
+ftp*.txt
+*.sql
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
