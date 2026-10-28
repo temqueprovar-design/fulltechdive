@@ -102,7 +102,8 @@
 
 /* ---------- chamada final ---------- */
 .sec--cta{padding-bottom:100px}
-.cta__btns{gap:16px}
+.cta__btns{flex-direction:column;align-items:center;gap:10px}
+.cta__note{font-size:.8rem;color:var(--muted);letter-spacing:.02em}
 
 /* ---------- profundímetro ---------- */
 .depth{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:30;height:min(52vh,420px);width:22px;pointer-events:none;display:none;color:#d6e8ee}

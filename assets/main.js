@@ -114,9 +114,6 @@ function renderChrome() {
   document.getElementById('site-footer').replaceWith(footer);
   addBubbles(footer);
 
-  const fab = link('https://wa.me/5521988350209', 'whats-fab', 'WhatsApp', true);
-  fab.setAttribute('aria-label', 'WhatsApp');
-  document.body.appendChild(fab);
 }
 
 // bolhas subindo no rodapé (sutil; desligado para quem pede menos movimento)
@@ -221,7 +218,8 @@ if (productsEl) {
           body.appendChild(ul);
         }
       }
-      body.appendChild(link('contato.html', 'link', 'Solicitar orçamento →'));
+      const msg = 'Olá! Vim pelo site da Full Tech Dive e gostaria de um orçamento: ' + (p.name || title.textContent) + '.';
+      body.appendChild(link('https://wa.me/5521988350209?text=' + encodeURIComponent(msg), 'link', 'Solicitar orçamento →', true));
       c.appendChild(body);
     } else {
       c.classList.add('pcard--photo');

@@ -216,7 +216,6 @@ h3{font-size:1.4rem;font-weight:700;text-transform:uppercase}
 .footer__about{margin-top:14px;max-width:32ch}
 .footer__copy{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem}
 
-.whats-fab{position:fixed;right:16px;bottom:16px;z-index:40;background:#1faa59;color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:12px 18px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
 
 /* ---------- responsivo ---------- */
 @media (min-width:640px){
@@ -276,3 +275,12 @@ h3{font-size:1.4rem;font-weight:700;text-transform:uppercase}
   text-shadow:0 1px 0 rgba(0,0,0,.4)}
 .btn--steel:hover{filter:brightness(1.15)}
 .btn--steel:active{transform:translateY(5px);box-shadow:0 1px 0 #031019,0 4px 8px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.2)}
+
+/* ---------- menu industrial ---------- */
+.nav a{position:relative;font-family:var(--f-head);font-weight:700;font-size:1.12rem;letter-spacing:.14em;text-transform:uppercase;color:#cfe3ea;padding:14px 16px;transition:color .18s,text-shadow .18s}
+.nav a::before,.nav a::after{content:"";position:absolute;width:9px;height:9px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+.nav a::before{left:3px;top:5px;border-top:2px solid var(--yellow);border-left:2px solid var(--yellow);transform:translate(5px,5px)}
+.nav a::after{right:3px;bottom:5px;border-bottom:2px solid var(--yellow);border-right:2px solid var(--yellow);transform:translate(-5px,-5px)}
+.nav a:hover,.nav a[aria-current]{color:var(--yellow);text-shadow:0 0 12px rgba(245,184,0,.5)}
+.nav a:hover::before,.nav a:hover::after,.nav a[aria-current]::before,.nav a[aria-current]::after{opacity:1;transform:none}
+@media (min-width:980px){.nav{gap:10px}.nav a{padding:10px 16px;font-size:1.08rem;border:0}}
