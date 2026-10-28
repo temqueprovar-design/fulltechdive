@@ -8,3 +8,6 @@ ftp*.txt
 .DS_Store
 Thumbs.db
 node_modules/
+
+# Backup do site original (baixado via FTP)
+backup/
