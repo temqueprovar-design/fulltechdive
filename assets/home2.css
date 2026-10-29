@@ -28,28 +28,10 @@ ul{list-style:none}
 .btn--dark{background:var(--black);color:#fff}
 .btn--dark:hover{background:#222}
 
-/* ---------- logo (placa de inox) ---------- */
-.logo{display:inline-flex;text-decoration:none;flex:none}
-.logo__mark{position:relative;display:inline-flex;flex-direction:column;align-items:stretch;padding:6px 16px 5px;border-radius:5px;line-height:1;text-align:center;
-  font-family:var(--f-head);font-weight:800;color:#33404a;border:1px solid #5d6a73;
-  background:
-    linear-gradient(100deg,transparent 31%,rgba(255,255,255,.55) 31.3%,transparent 31.8%),
-    linear-gradient(62deg,transparent 61%,rgba(40,30,20,.28) 61.2%,transparent 61.6%),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.2) 0 1px,rgba(0,0,0,.07) 1px 2px),
-    linear-gradient(135deg,#dfe4e7 0%,#aab3b9 28%,#eef1f2 50%,#9aa4ab 76%,#c9cfd3 100%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(0,0,0,.3),inset 0 0 16px rgba(70,45,20,.3),0 3px 0 #4b565e}
-.logo__mark::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:
-    radial-gradient(circle at 6px 6px,#8d989f 0 1.8px,#46515a 1.9px 2.7px,transparent 2.8px),
-    radial-gradient(circle at calc(100% - 6px) 6px,#8d989f 0 1.8px,#46515a 1.9px 2.7px,transparent 2.8px),
-    radial-gradient(circle at 6px calc(100% - 6px),#8d989f 0 1.8px,#46515a 1.9px 2.7px,transparent 2.8px),
-    radial-gradient(circle at calc(100% - 6px) calc(100% - 6px),#8d989f 0 1.8px,#46515a 1.9px 2.7px,transparent 2.8px)}
-.logo__t{font-size:1.35rem;letter-spacing:.07em;white-space:nowrap;text-shadow:0 1px 0 rgba(255,255,255,.85),0 -1px 0 rgba(0,0,0,.4)}
-.logo__sub{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:2px}
-.logo__yr{font-size:.5rem;font-weight:700;letter-spacing:.16em;text-shadow:0 1px 0 rgba(255,255,255,.8)}
-.logo__dv{font-size:.9rem;letter-spacing:.3em;margin-right:-.3em;text-shadow:0 1px 0 rgba(255,255,255,.85),0 -1px 0 rgba(0,0,0,.4)}
-.logo__mark--sm .logo__t{font-size:1.1rem}
-.logo__mark--sm .logo__dv{font-size:.8rem}
+/* ---------- logo original (arquivo do site atual) ---------- */
+.logo{display:inline-flex;flex:none}
+.logo__img{height:46px;width:auto;filter:invert(1)}
+.logo__img--f{height:44px;filter:none}
 
 /* ---------- navegação fixa ---------- */
 .nav{position:fixed;inset:0 0 auto 0;z-index:60;transition:background .3s,box-shadow .3s}

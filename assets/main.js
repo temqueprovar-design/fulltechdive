@@ -31,11 +31,11 @@ const docUrl = c => DOCS + encodeURIComponent(c.file);
 
 // ---------- Cabeçalho e rodapé (iguais em todas as páginas) ----------
 function logo(small) {
-  const m = el('span', 'logo__mark' + (small ? ' logo__mark--sm' : ''));
-  const sub = el('span', 'logo__sub');
-  sub.append(el('span', 'logo__yr', 'SINCE 1998'), el('span', 'logo__dv', 'DIVE'));
-  m.append(el('span', 'logo__t', 'FULL TECH'), sub);
-  return m;
+  const i = document.createElement('img');
+  i.src = 'assets/img/site/' + (small ? 'logo_footer_02.png' : 'logo.png');
+  i.alt = 'Full Tech Dive';
+  i.className = 'logo__img' + (small ? ' logo__img--f' : '');
+  return i;
 }
 
 function renderChrome() {
