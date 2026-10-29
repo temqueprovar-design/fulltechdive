@@ -288,3 +288,16 @@ h3{font-size:1.4rem;font-weight:700;text-transform:uppercase}
 /* logo original */
 .logo__img{height:92px;width:auto}
 .logo__img--f{height:92px;filter:none}
+
+.nav .logo,.topbar .logo{position:relative;display:inline-block;line-height:0}
+.nav .logo::before,.nav .logo::after,.topbar .logo::before,.topbar .logo::after{
+  content:"";position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;pointer-events:none;opacity:0;transform:scale(0) rotate(0);
+  background:
+    radial-gradient(circle,#fff 0,rgba(255,255,255,.85) 9%,rgba(255,255,255,0) 46%),
+    linear-gradient(90deg,rgba(255,255,255,0),#fff 50%,rgba(255,255,255,0)) center/100% 2px no-repeat,
+    linear-gradient(0deg,rgba(255,255,255,0),#fff 50%,rgba(255,255,255,0)) center/2px 100% no-repeat;
+  animation:glint 9s ease-in-out infinite}
+.nav .logo::before,.topbar .logo::before{left:6%;top:13%}
+.nav .logo::after,.topbar .logo::after{left:93%;top:88%;animation-delay:4.5s}
+@keyframes glint{0%,14%,100%{opacity:0;transform:scale(0) rotate(0)}5%{opacity:1;transform:scale(1) rotate(45deg)}9%{opacity:.9;transform:scale(.8) rotate(90deg)}}
+@media (prefers-reduced-motion:reduce){.nav .logo::before,.nav .logo::after,.topbar .logo::before,.topbar .logo::after{animation:none}}
