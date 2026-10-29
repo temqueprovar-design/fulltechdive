@@ -148,3 +148,11 @@
   .slide__media{order:-1}
   .porthole{width:min(74%,320px);margin:6px auto 4px}
 }
+
+/* ---------- faixa de números ---------- */
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin:0 0 56px;border-radius:22px;overflow:hidden;background:rgba(255,255,255,.14);
+  box-shadow:0 0 0 3px #e3edf1,0 0 0 4px #9fb4be,0 22px 40px rgba(6,36,51,.25)}
+.facts li{padding:22px 18px;background:linear-gradient(180deg,#0d3a4e,#062433)}
+.facts strong{display:block;font-family:var(--f-head);font-size:clamp(2.2rem,8vw,3.4rem);line-height:1;font-weight:800;color:var(--yellow);text-shadow:0 0 18px rgba(245,184,0,.25)}
+.facts span{display:block;margin-top:6px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#a9c9d4}
+@media (min-width:760px){.facts{grid-template-columns:repeat(4,1fr)}.facts li{padding:26px 24px}}

@@ -155,3 +155,11 @@ if (heroRoot && SLIDES.length) {
   addEventListener('resize', update);
   update();
 })();
+
+// ---------- Faixa de números (valores vêm dos dados) ----------
+(function facts() {
+  const set = (k, v) => { const n = document.querySelector('[data-fact="' + k + '"]'); if (n) n.textContent = v; };
+  set('cats', CATEGORIAS.length);
+  set('prods', CATEGORIAS.reduce((n, c) => n + c.products.length, 0));
+  set('brands', document.querySelectorAll('.partner').length);
+})();
