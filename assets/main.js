@@ -62,7 +62,7 @@ function renderChrome() {
   });
 
   const act = el('div', 'topbar__act');
-  const cta = link('catalogos.html', 'btn btn--machine btn--sm', 'Catálogos');
+  const cta = link('catalogos.html', 'btn btn--machine btn--sm', 'Catálogo');
   if (page === 'catalogos') cta.setAttribute('aria-current', 'page');
   const burger = el('button', 'burger');
   burger.setAttribute('aria-label', 'Abrir menu');
@@ -88,11 +88,11 @@ function renderChrome() {
 
   const c1 = el('div');
   c1.append(logo(true), el('p', 'footer__about', 'Equipamentos para mergulho comercial e subsea.'));
-  c1.appendChild(link('catalogos.html', 'btn btn--machine', 'Baixar catálogos'));
+  c1.appendChild(link('catalogos.html', 'btn btn--machine', 'Baixar catálogo'));
 
   const c2 = el('div');
   c2.appendChild(el('h4', null, 'Navegação'));
-  [['Produtos', 'produtos.html'], ['Catálogos', 'catalogos.html'], ['A empresa', 'empresa.html'], ['Contato', 'contato.html']]
+  [['Produtos', 'produtos.html'], ['Catálogo', 'catalogos.html'], ['A empresa', 'empresa.html'], ['Contato', 'contato.html']]
     .forEach(([t, h]) => c2.appendChild(link(h, null, t)));
 
   const c3 = el('div');
@@ -166,7 +166,7 @@ if (docsList) {
     const cover = el('div', 'doc__cover');
     cover.appendChild(img('assets/img/site/' + c.cover, ''));
     const body = el('div', 'doc__body');
-    if (i === 0) body.appendChild(el('span', 'badge', 'Mais recente'));
+    if (i === 0 && CATALOGOS.length > 1) body.appendChild(el('span', 'badge', 'Mais recente'));
     body.appendChild(el('h3', null, c.title));
     body.appendChild(el('p', 'doc__meta', 'PDF · ' + c.size + ' · ' + c.year));
     const btns = el('div', 'doc__btns');

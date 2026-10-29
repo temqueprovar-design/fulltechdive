@@ -160,7 +160,8 @@ ul{list-style:none}
 .brand{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;background:#1b1b1b;text-decoration:none;border:1px solid #262626;transition:border-color .2s,transform .2s}
 .brand:hover{border-color:var(--yellow);transform:translateY(-3px)}
 .brand img{width:100%;aspect-ratio:3/2;object-fit:cover}
-.brand span{padding:14px 16px;font-size:.85rem;font-weight:600;color:#fff}
+.brand span{padding:14px 16px 2px;font-size:.9rem;font-weight:600;color:#fff}
+.brand small{padding:0 16px 16px;font-size:.76rem;font-weight:600;color:var(--yellow)}
 @media (min-width:760px){.brands{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:1100px){.brands{grid-template-columns:repeat(5,1fr)}}
 
