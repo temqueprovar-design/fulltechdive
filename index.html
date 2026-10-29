@@ -4,178 +4,207 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Full Tech Dive | Equipamentos para mergulho profissional</title>
-<meta name="description" content="Equipamentos para mergulho comercial e subsea: unidades hidráulicas, câmaras hiperbáricas, máscaras, capacetes, ar comprimido e mais. Rio de Janeiro.">
+<meta name="description" content="Full Tech Dive: desenvolvemos, fabricamos e fornecemos equipamentos para mergulho comercial e subsea. Unidades hidráulicas, câmaras hiperbáricas, máscaras, capacetes e mais. Rio de Janeiro.">
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/home.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@100;200;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/home2.css">
 </head>
-<body data-page="home">
+<body>
 
-<div id="site-header"></div>
+<header class="nav">
+  <div class="container nav__in">
+    <a class="logo" href="index.html" aria-label="Full Tech Dive - início">
+      <span class="logo__mark"><span class="logo__t">FULL TECH</span><span class="logo__sub"><span class="logo__yr">SINCE 1998</span><span class="logo__dv">DIVE</span></span></span>
+    </a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="produtos.html">Produtos</a>
+      <a href="#marcas">Marcas</a>
+      <a href="#empresa">A empresa</a>
+      <a href="contato.html">Contato</a>
+    </nav>
+    <div class="nav__act">
+      <a class="btn btn--y" href="catalogos.html">Catálogos</a>
+      <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <nav class="nav__menu" id="menu" aria-label="Menu">
+    <a href="produtos.html">Produtos</a>
+    <a href="#marcas">Marcas</a>
+    <a href="#empresa">A empresa</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+</header>
 
 <main>
-  <!-- HERO: carrossel de produtos (slides em assets/data/hero.js) -->
-  <section class="hero2">
-    <div class="wrap">
-      <div id="hero-slider" aria-roledescription="carousel" aria-label="Produtos em destaque"></div>
+  <!-- HERO. Para usar foto ou vídeo: colocar <video>/<img> com class="hero__media" dentro de .hero__bg -->
+  <section class="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__ov"></div>
+    <div class="hero__c">
+      <p class="eyebrow">Full Tech Dive · Rio de Janeiro</p>
+      <h1><span class="h1-a">Full Tech Dive:</span><span class="h1-b">Mergulho profissional</span></h1>
+      <hr class="hero__rule">
+      <p class="tagline">Equipamentos para o trabalho submarino</p>
+      <div class="hero__btns">
+        <a class="btn btn--y" href="#produtos">Ver produtos ↓</a>
+        <a class="btn btn--o" href="#empresa">A empresa</a>
+      </div>
     </div>
+    <div class="hero__scroll" aria-hidden="true">ROLE</div>
   </section>
 
-  <!-- LINHAS EM DESTAQUE -->
-  <section class="sec sec--cats">
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V40C160 6 320 4 520 34S900 76 1100 48 1340 14 1440 34V80Z"/></svg>
-    <div class="wrap">
-      <ul class="facts" id="facts">
-        <li><strong data-fact="cats">13</strong><span>linhas de produtos</span></li>
-        <li><strong data-fact="prods">55</strong><span>equipamentos</span></li>
-        <li><strong data-fact="brands">5</strong><span>marcas representadas</span></li>
-        <li><strong>RJ</strong><span>sede no Rio de Janeiro</span></li>
-      </ul>
-      <header class="sec__head sec__head--row">
-        <div>
-          <p class="eyebrow">Produtos</p>
-          <h2>Linhas em destaque</h2>
-        </div>
-        <a class="link" href="produtos.html">Ver todas as categorias →</a>
-      </header>
-      <div class="cats" id="cats-grid"></div>
-    </div>
-  </section>
+  <!-- NÚMEROS -->
+  <div class="stats">
+    <ul class="container stats__g">
+      <li><strong data-fact="cats">13</strong><span>Linhas de produtos</span></li>
+      <li><strong data-fact="prods">55</strong><span>Equipamentos</span></li>
+      <li><strong data-fact="brands">5</strong><span>Marcas representadas</span></li>
+      <li><strong>Rio de Janeiro</strong><span>Sede da empresa</span></li>
+    </ul>
+  </div>
 
-  <!-- CATÁLOGO -->
-  <section class="sec sec--navy">
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V30C220 74 420 76 640 44S1060 -6 1240 22 1380 50 1440 40V80Z"/></svg>
-    <div class="wrap catband">
-      <div class="catband__cover"><img src="assets/img/site/catalogoft.jpg" alt="Capa do catálogo Full Tech" loading="lazy"></div>
-      <div>
-        <p class="eyebrow">Catálogos</p>
-        <h2>Todos os equipamentos em PDF</h2>
-        <p>Baixe o catálogo completo com as especificações técnicas de cada linha de produtos.</p>
-        <div class="catband__btns">
-          <a class="btn btn--machine" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
-          <a class="btn btn--steel" href="catalogos.html">Ver todos os catálogos</a>
-          <small data-latest-size></small>
-        </div>
+  <!-- FABRICAÇÃO PRÓPRIA -->
+  <section class="feat">
+    <div class="feat__bg"></div>
+    <div class="container">
+      <div class="feat__in">
+        <p class="eyebrow eyebrow--y">Fabricação própria</p>
+        <h2 class="big">Desenvolvemos, fabricamos e fornecemos.</h2>
+        <p>Da ideia ao equipamento pronto para a operação: a Full Tech projeta, fabrica e entrega o que o mergulho profissional precisa.</p>
+        <p>Nascida das demandas do mercado de mergulho, a empresa atua hoje no mercado subsea e de mergulho comercial, com um portfólio completo e projetos exclusivos para cada cliente.</p>
       </div>
     </div>
   </section>
+
+  <!-- PRODUTOS -->
+  <section class="sec" id="produtos">
+    <div class="container">
+      <header class="s-head">
+        <p class="eyebrow">Linha profissional</p>
+        <h2>Equipamentos para quem trabalha debaixo d'água.</h2>
+        <p class="s-sub">Unidades hidráulicas, ferramentas, ar comprimido, máscaras e capacetes, câmaras hiperbáricas e inspeção.</p>
+      </header>
+      <ul class="p-grid" id="p-grid"></ul>
+      <p class="p-more"><a class="btn btn--dark" href="produtos.html">Ver todas as linhas →</a></p>
+    </div>
+  </section>
+
+  <!-- CATÁLOGOS -->
+  <section class="feat feat--r feat--cat">
+    <div class="feat__bg"></div>
+    <div class="container">
+      <div class="feat__in">
+        <p class="eyebrow eyebrow--y">Catálogos</p>
+        <h2 class="big">Todos os equipamentos em PDF.</h2>
+        <p>Baixe o catálogo completo com as especificações técnicas de cada linha de produtos.</p>
+        <div class="feat__btns">
+          <a class="btn btn--y" href="catalogos.html" data-latest-doc data-label="Baixar catálogo">Baixar catálogo</a>
+          <a class="btn btn--o" href="catalogos.html">Ver todos os catálogos</a>
+        </div>
+      </div>
+      <div class="feat__cover"><img src="assets/img/site/catalogoft.jpg" alt="Capa do catálogo Full Tech" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- EMPRESA -->
+  <section class="sec dark" id="empresa">
+    <div class="container about">
+      <div>
+        <p class="eyebrow eyebrow--y">A empresa</p>
+        <h2>Soluções criadas a partir da demanda do mergulho.</h2>
+        <div class="about__stats">
+          <div><strong data-fact="cats">13</strong><span>Linhas de produtos</span></div>
+          <div><strong data-fact="prods">55</strong><span>Equipamentos</span></div>
+          <div><strong data-fact="docs">3</strong><span>Catálogos em PDF</span></div>
+          <div><strong>RJ</strong><span>Penha, Rio de Janeiro</span></div>
+        </div>
+      </div>
+      <div class="about__t">
+        <p>A Full Tech foi criada a partir das demandas do mercado de mergulho. Desde o início, o objetivo foi desenvolver e fornecer equipamentos que superassem as expectativas dos clientes, não só na qualidade, mas também na eficácia das soluções propostas. Por isso, a excelência, mais do que uma busca, se tornou a marca da empresa.</p>
+        <p>Hoje a principal área de atuação é o mercado subsea e de mergulho comercial, com um portfólio completo para todas as operações. Além disso, a Full Tech oferece projetos exclusivos, feitos especialmente para cada demanda.</p>
+        <p>Estamos prontos para receber a sua empresa. Entre em contato para conhecer nosso portfólio de clientes e projetos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="marq" id="marq" aria-hidden="true"></section>
 
   <!-- MARCAS -->
-  <section class="sec sec--gray">
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V44C240 78 440 74 700 40S1100 -2 1440 36V80Z"/></svg>
-    <div class="wrap">
-      <header class="sec__head">
-        <p class="eyebrow">Representações</p>
-        <h2>Marcas que representamos</h2>
-        <p class="lead">A Full Tech é representante das marcas abaixo. Conheça os fabricantes.</p>
+  <section class="sec s-brands" id="marcas">
+    <div class="container">
+      <header class="s-head">
+        <p class="eyebrow eyebrow--y">Representações</p>
+        <h2>Marcas que representamos.</h2>
+        <p class="s-sub">A Full Tech é representante das marcas abaixo. Conheça os fabricantes.</p>
       </header>
-      <div class="partners">
-        <a class="partner" href="https://www.broco-rankin.com/" target="_blank" rel="noopener"><img src="assets/img/site/links02.jpg" alt="" loading="lazy"><span>Broco Rankin</span></a>
-        <a class="partner" href="https://pt.caviblaster.com/" target="_blank" rel="noopener"><img src="assets/img/site/links05.jpg" alt="" loading="lazy"><span>Cavi Blaster</span></a>
-        <a class="partner" href="http://www.kirbymorgan.com/products/helmets" target="_blank" rel="noopener"><img src="assets/img/site/links01.jpg" alt="" loading="lazy"><span>Kirby Morgan</span></a>
-        <a class="partner" href="https://www.emerson.com/en-us/catalog/valves-actuators-regulators/regulators" target="_blank" rel="noopener"><img src="assets/img/site/links04.jpg" alt="" loading="lazy"><span>Tescom</span></a>
-        <a class="partner" href="https://www.cygnus-instruments.com/us/" target="_blank" rel="noopener"><img src="assets/img/site/links03.jpg" alt="" loading="lazy"><span>Cygnus</span></a>
+      <div class="brands">
+        <a class="brand" href="http://www.kirbymorgan.com/products/helmets" target="_blank" rel="noopener"><img src="assets/img/site/links01.jpg" alt="" loading="lazy"><span>Kirby Morgan</span></a>
+        <a class="brand" href="https://www.broco-rankin.com/" target="_blank" rel="noopener"><img src="assets/img/site/links02.jpg" alt="" loading="lazy"><span>Broco Rankin</span></a>
+        <a class="brand" href="https://pt.caviblaster.com/" target="_blank" rel="noopener"><img src="assets/img/site/links05.jpg" alt="" loading="lazy"><span>Cavi Blaster</span></a>
+        <a class="brand" href="https://www.emerson.com/en-us/catalog/valves-actuators-regulators/regulators" target="_blank" rel="noopener"><img src="assets/img/site/links04.jpg" alt="" loading="lazy"><span>Tescom</span></a>
+        <a class="brand" href="https://www.cygnus-instruments.com/us/" target="_blank" rel="noopener"><img src="assets/img/site/links03.jpg" alt="" loading="lazy"><span>Cygnus</span></a>
       </div>
     </div>
   </section>
 
-  <!-- DIFERENCIAIS -->
-  <section class="sec">
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V36C200 8 380 10 600 40S980 74 1180 44 1380 12 1440 28V80Z"/></svg>
-    <div class="wrap">
-      <header class="sec__head">
-        <p class="eyebrow">Fabricação própria</p>
-        <h2>Desenvolvemos, fabricamos e fornecemos.</h2>
-        <p class="lead">Da ideia ao equipamento pronto para a operação: a Full Tech projeta, fabrica e entrega o que o mergulho profissional precisa.</p>
+  <!-- POR QUE -->
+  <section class="sec s-why">
+    <div class="container">
+      <header class="s-head">
+        <p class="eyebrow eyebrow--y">Por que a Full Tech</p>
+        <h2>Padrão profissional. Solução sob medida.</h2>
       </header>
-    </div>
-    <div class="wrap feats">
-      <article class="feat">
-        <svg viewBox="14 20 68 68" aria-hidden="true" stroke="rgba(0,0,0,.2)" stroke-width=".8" stroke-linejoin="round">
-          <!-- cubo A (amarelo) -->
-          <path d="M23.88 57L36 64V78L23.88 71Z" fill="#e0a300"/><path d="M48.12 57L36 64V78L48.12 71Z" fill="#a87800"/><path d="M36 50L48.12 57L36 64L23.88 57Z" fill="#ffe27a"/>
-          <!-- cubo B (azul-petróleo) -->
-          <path d="M48.12 57L60.24 64V78L48.12 71Z" fill="#2ba5b5"/><path d="M72.36 57L60.24 64V78L72.36 71Z" fill="#0e6475"/><path d="M60.24 50L72.36 57L60.24 64L48.12 57Z" fill="#8fe6ee"/>
-          <!-- cubo C (amarelo, em cima) -->
-          <path d="M23.88 43L36 50V64L23.88 57Z" fill="#e0a300"/><path d="M48.12 43L36 50V64L48.12 57Z" fill="#a87800"/><path d="M36 36L48.12 43L36 50L23.88 43Z" fill="#ffe27a"/>
-        </svg>
-        <h3>Portfólio completo</h3>
-        <p>Todos os equipamentos necessários para operações de mergulho, de unidades hidráulicas a câmaras hiperbáricas.</p>
-      </article>
-      <article class="feat">
-        <svg viewBox="0 0 92 92" aria-hidden="true">
-          <defs>
-            <radialGradient id="gearBody" cx=".35" cy=".28" r=".85"><stop offset="0" stop-color="#8fe6ee"/><stop offset=".55" stop-color="#1f93a5"/><stop offset="1" stop-color="#0a4257"/></radialGradient>
-            <linearGradient id="gearTeeth" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fdde8"/><stop offset="1" stop-color="#0e6475"/></linearGradient>
-            <radialGradient id="gearHub" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff0a8"/><stop offset=".6" stop-color="#f5b800"/><stop offset="1" stop-color="#a87800"/></radialGradient>
-          </defs>
-          <!-- espessura (cópia escura deslocada) -->
-          <g transform="translate(0 6)">
-            <circle cx="46" cy="42" r="26" fill="none" stroke="#06303f" stroke-width="10" stroke-dasharray="7.2 6.42"/>
-            <circle cx="46" cy="42" r="25" fill="#06303f"/>
-          </g>
-          <!-- face -->
-          <circle cx="46" cy="42" r="26" fill="none" stroke="url(#gearTeeth)" stroke-width="10" stroke-dasharray="7.2 6.42"/>
-          <circle cx="46" cy="42" r="25" fill="url(#gearBody)"/>
-          <circle cx="46" cy="42" r="25" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
-          <circle cx="46" cy="42" r="14" fill="#0a3a4f" stroke="#9fe9f1" stroke-width="1.5"/>
-          <circle cx="46" cy="42" r="8" fill="url(#gearHub)"/>
-          <path d="M30 30a22 22 0 0 1 14-9" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
-        <h3>Projetos exclusivos</h3>
-        <p>Soluções desenvolvidas sob medida para atender a demanda específica de cada cliente.</p>
-      </article>
-      <article class="feat">
-        <svg viewBox="0 0 92 92" aria-hidden="true">
-          <defs>
-            <linearGradient id="tankBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a87800"/><stop offset=".3" stop-color="#ffe066"/><stop offset=".55" stop-color="#f5b800"/><stop offset="1" stop-color="#8a6200"/></linearGradient>
-            <linearGradient id="tankSteel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d8fa0"/><stop offset=".4" stop-color="#e3f1f5"/><stop offset="1" stop-color="#56788a"/></linearGradient>
-            <clipPath id="tankClip"><path d="M28 40Q28 24 46 24Q64 24 64 40V74Q64 83 46 83Q28 83 28 74Z"/></clipPath>
-          </defs>
-          <ellipse cx="46" cy="84" rx="20" ry="4" fill="rgba(6,36,51,.35)"/>
-          <path d="M28 40Q28 24 46 24Q64 24 64 40V74Q64 83 46 83Q28 83 28 74Z" fill="url(#tankBody)"/>
-          <g clip-path="url(#tankClip)">
-            <rect x="28" y="54" width="36" height="7" fill="#0a4257" opacity=".85"/>
-            <rect x="28" y="54" width="36" height="2" fill="rgba(255,255,255,.35)"/>
-            <rect x="34" y="28" width="4" height="56" rx="2" fill="rgba(255,255,255,.4)"/>
-          </g>
-          <rect x="40" y="14" width="12" height="13" rx="2" fill="url(#tankSteel)"/>
-          <rect x="52" y="16" width="12" height="6" rx="2" fill="url(#tankSteel)"/>
-          <ellipse cx="46" cy="12" rx="15" ry="4" fill="#2a5970"/>
-          <ellipse cx="46" cy="10.8" rx="15" ry="3.6" fill="#4a7c93"/>
-          <rect x="44" y="10" width="4" height="6" fill="#d8eaf0"/>
-        </svg>
-        <h3>Recarga, locação e manutenção</h3>
-        <p>Recarga de cilindros, locação de câmaras hiperbáricas e manutenção de máscaras e capacetes.</p>
-      </article>
+      <ul class="why">
+        <li><strong>Completo</strong><h3>Portfólio</h3><p>Todos os equipamentos necessários para operações de mergulho, de unidades hidráulicas a câmaras hiperbáricas.</p></li>
+        <li><strong>3 serviços</strong><h3>Apoio à operação</h3><p>Recarga de cilindros (ar, nitrox, trimix, oxigênio e argônio), locação de câmaras hiperbáricas e manutenção de máscaras e capacetes.</p></li>
+        <li><strong>Sob medida</strong><h3>Projetos exclusivos</h3><p>Soluções desenvolvidas para atender a demanda específica de cada cliente.</p></li>
+      </ul>
     </div>
   </section>
 
   <!-- CHAMADA FINAL -->
-  <section class="sec sec--cta">
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80V30C180 70 360 74 580 44S960 -4 1160 24 1380 54 1440 40V80Z"/></svg>
-    <div class="wrap cta">
+  <section class="s-cta">
+    <div class="container cta">
       <div>
-        <h2>Precisa de um equipamento ou projeto sob medida?</h2>
-        <p class="lead">Fale com a gente e receba um orçamento.</p>
+        <h2>Fale com a Full Tech.</h2>
+        <p>Conte o que você precisa e receba um orçamento. Atendimento direto pelo WhatsApp, de equipamentos de linha a projetos sob medida.</p>
       </div>
-      <div class="cta__btns">
-        <a class="btn btn--machine" href="https://wa.me/5521988350209?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Full%20Tech%20Dive%20e%20gostaria%20de%20pedir%20um%20or%C3%A7amento." target="_blank" rel="noopener">Pedir orçamento</a>
-        <small class="cta__note">Atendimento direto pelo WhatsApp</small>
-      </div>
+      <a class="btn btn--y" href="https://wa.me/5521988350209?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Full%20Tech%20Dive%20e%20gostaria%20de%20pedir%20um%20or%C3%A7amento." target="_blank" rel="noopener">Pedir orçamento →</a>
     </div>
   </section>
 </main>
 
-<div id="site-footer"></div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__g">
+      <div>
+        <a class="logo" href="index.html" aria-label="Full Tech Dive"><span class="logo__mark logo__mark--sm"><span class="logo__t">FULL TECH</span><span class="logo__sub"><span class="logo__yr">SINCE 1998</span><span class="logo__dv">DIVE</span></span></span></a>
+        <p style="margin-top:16px">Equipamentos para mergulho comercial e subsea.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <a href="produtos.html">Produtos</a>
+        <a href="catalogos.html">Catálogos</a>
+        <a href="#empresa">A empresa</a>
+        <a href="contato.html">Contato</a>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <p>Rua Latino Coelho, 22ª — Penha<br>Rio de Janeiro - RJ · CEP 21070-720</p>
+        <a href="tel:+552122707847">(21) 2270-7847</a>
+        <a href="tel:+5521988350209">(21) 98835-0209 (WhatsApp)</a>
+        <a href="mailto:contato@fulltechdive.com.br">contato@fulltechdive.com.br</a>
+        <a href="https://www.facebook.com/fulltechdive/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer__c">© <span id="ano"></span> Full Tech Dive. Todos os direitos reservados.</div>
+  </div>
+</footer>
 
 <script src="assets/data/products.js"></script>
 <script src="assets/data/catalogos.js"></script>
-<script src="assets/data/hero.js"></script>
-<script src="assets/main.js"></script>
-<script src="assets/home.js"></script>
+<script src="assets/home2.js"></script>
 </body>
 </html>
