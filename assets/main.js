@@ -98,7 +98,7 @@ function renderChrome() {
   const c3 = el('div');
   c3.appendChild(el('h4', null, 'Contato'));
   const addr = el('p');
-  addr.append('Rua Latino Coelho, 22ª — Penha', document.createElement('br'), 'Rio de Janeiro - RJ · CEP 21070-720');
+  addr.append('Rua Latino Coelho, 22ª', document.createElement('br'), 'Penha, Rio de Janeiro - RJ · CEP: 21070-720');
   c3.append(addr,
     link('tel:+552122707847', null, '(21) 2270-7847'),
     link('tel:+5521988350209', null, '(21) 98835-0209 (WhatsApp)'),
