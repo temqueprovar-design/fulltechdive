@@ -1,4 +1,4 @@
-/* Home no estilo DiveSystem: Inter única, hero enorme e fino, blocos largos, cartões de produto.
+﻿/* Home no estilo DiveSystem: Inter única, hero enorme e fino, blocos largos, cartões de produto.
    Autônomo: não depende de style.css nem home.css. */
 :root{
   --black:#020202; --ink:#111; --panel:#1a1a1a; --bg:#f6f6f6; --white:#fff;
@@ -30,7 +30,7 @@ ul{list-style:none}
 
 /* ---------- logo original (arquivo do site atual) ---------- */
 .logo{display:inline-flex;flex:none}
-.logo__img{height:clamp(46px,14vw,58px);width:auto;filter:invert(1)}
+.logo__img{height:clamp(46px,14vw,58px);width:auto}
 .logo__img--f{height:56px;width:auto;filter:none}
 
 /* ---------- navegação fixa ---------- */
