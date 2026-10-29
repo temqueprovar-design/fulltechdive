@@ -35,7 +35,7 @@ h3{font-size:1.4rem;font-weight:700;text-transform:uppercase}
 
 /* ---------- cabeçalho (azul-marinho) ---------- */
 .topbar{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.08)}
-.topbar__in{display:flex;align-items:center;gap:12px;height:68px}
+.topbar__in{display:flex;align-items:center;gap:12px;height:84px}
 .topbar__act{margin-left:auto;display:flex;align-items:center;gap:8px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
 /* placa de inox gravada */
@@ -286,5 +286,5 @@ h3{font-size:1.4rem;font-weight:700;text-transform:uppercase}
 @media (min-width:980px){.nav{gap:10px}.nav a{padding:10px 16px;font-size:1.08rem;border:0}}
 
 /* logo original */
-.logo__img{height:54px;width:auto}
-.logo__img--f{height:52px;filter:none}
+.logo__img{height:68px;width:auto}
+.logo__img--f{height:68px;filter:none}
