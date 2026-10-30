@@ -74,7 +74,7 @@
       im.src = u;
     });
   }
-  function compress(file, max, q) {
+  function compress(file, max, q, keepPng) {
     var p = window.createImageBitmap
       ? createImageBitmap(file, { imageOrientation: 'from-image' }).catch(function () { return loadImage(file); })
       : loadImage(file);
@@ -84,11 +84,11 @@
       c.width = Math.max(1, Math.round(w * sc));
       c.height = Math.max(1, Math.round(hh * sc));
       var x = c.getContext('2d');
-      x.fillStyle = '#fff';
-      x.fillRect(0, 0, c.width, c.height);
+      var png = keepPng && file.type === 'image/png';
+      if (!png) { x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); }
       x.drawImage(bmp, 0, 0, c.width, c.height);
       return new Promise(function (res, rej) {
-        c.toBlob(function (b) { b ? res(b) : rej(new Error('Não consegui preparar a foto.')); }, 'image/jpeg', q);
+        c.toBlob(function (b) { b ? res(b) : rej(new Error('Não consegui preparar a foto.')); }, png ? 'image/png' : 'image/jpeg', q);
       });
     });
   }
@@ -99,10 +99,10 @@
     function next() {
       if (i >= list.length) return Promise.resolve(out);
       busy(true, 'Enviando foto ' + (i + 1) + ' de ' + list.length + '…');
-      return compress(list[i], max, 0.82).then(function (blob) {
+      return compress(list[i], max, 0.82, kind === 'link').then(function (blob) {
         var fd = new FormData();
         fd.append('kind', kind);
-        fd.append('file', blob, 'foto.jpg');
+        fd.append('file', blob, blob.type === 'image/png' ? 'foto.png' : 'foto.jpg');
         return api('upload', { body: fd });
       }).then(function (r) { out.push(r.file); i++; return next(); });
     }
@@ -160,7 +160,7 @@
     var err = h('div', { class: 'err', hidden: true });
     var user = h('input', { type: 'text', autocomplete: 'username', autocapitalize: 'none', autocorrect: 'off', spellcheck: 'false', value: localStorage.getItem('ftd_user') || '', 'aria-label': 'Usuário' });
     var pass = h('input', { type: 'password', autocomplete: 'current-password', 'aria-label': 'Senha' });
-    var eye = h('button', { type: 'button', onclick: function () { pass.type = pass.type === 'password' ? 'text' : 'password'; eye.textContent = pass.type === 'password' ? 'Ver' : 'Ocultar'; } }, 'Ver');
+    var eye = eyeButton(pass);
     var form = h('form', {
       onsubmit: function (e) {
         e.preventDefault();
@@ -177,11 +177,90 @@
       h('label', { class: 'f', style: 'color:#fff' }, 'Usuário'), user,
       h('label', { class: 'f', style: 'color:#fff' }, 'Senha'), h('div', { class: 'pw' }, pass, eye),
       err,
-      h('button', { class: 'btn y block', type: 'submit', style: 'margin-top:18px' }, 'Entrar'));
+      h('button', { class: 'btn y block', type: 'submit', style: 'margin-top:18px' }, 'Entrar'),
+      h('p', { style: 'text-align:center;margin-top:18px' }, h('a', { href: '#/esqueci', style: 'color:#ffcc00' }, 'Esqueci a senha')));
     app.replaceChildren(h('div', { class: 'login' },
       h('img', { src: '../assets/img/site/logo.png', alt: 'Full Tech Dive' }),
       h('p', { class: 'muted', style: 'color:#9aa;margin:0 0 22px', text: 'Painel do site' }),
       form));
+  }
+
+  // olhinho para mostrar/ocultar a senha
+  var EYE = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  var EYE_OFF = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.9 17.9A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.1-5.9M9.9 5.1A10.5 10.5 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.2 3.2M1 1l22 22"/><path d="M14.1 14.1a3 3 0 0 1-4.2-4.2"/></svg>';
+  function eyeButton(input) {
+    var b = h('button', { type: 'button', 'aria-label': 'Mostrar senha', title: 'Mostrar senha' });
+    b.innerHTML = EYE;
+    b.addEventListener('click', function () {
+      var show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      b.innerHTML = show ? EYE_OFF : EYE;
+      b.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+    });
+    return b;
+  }
+  function passField(label, light) {
+    var inp = h('input', { type: 'password', autocomplete: 'new-password' });
+    return { input: inp, node: [h('label', { class: 'f', style: light ? 'color:#fff' : null }, label), h('div', { class: 'pw' }, inp, eyeButton(inp))] };
+  }
+
+  function viewForgot() {
+    document.body.classList.add('dark');
+    var user = h('input', { type: 'text', autocapitalize: 'none', autocorrect: 'off', spellcheck: 'false', value: localStorage.getItem('ftd_user') || '', 'aria-label': 'Usuário' });
+    var msg = h('div', { class: 'ok', hidden: true });
+    var err = h('div', { class: 'err', hidden: true });
+    app.replaceChildren(h('div', { class: 'login' },
+      h('img', { src: '../assets/img/site/logo.png', alt: 'Full Tech Dive' }),
+      h('p', { class: 'muted', style: 'color:#9aa;margin:0 0 22px', text: 'Vamos mandar um link para criar uma nova senha, no e-mail cadastrado.' }),
+      h('form', { onsubmit: function (e) {
+        e.preventDefault();
+        err.hidden = true; msg.hidden = true;
+        busy(true, 'Enviando…');
+        api('forgot', { body: { user: user.value } }).then(function () {
+          busy(false);
+          msg.textContent = 'Pronto. Se esse usuário tiver e-mail cadastrado, o link chega em alguns minutos (olhe também o spam). Se não chegar, fale com o suporte.';
+          msg.hidden = false;
+        }).catch(function (e2) { busy(false); err.textContent = e2.message; err.hidden = false; });
+      } },
+        h('label', { class: 'f', style: 'color:#fff' }, 'Usuário'), user, err, msg,
+        h('button', { class: 'btn y block', type: 'submit', style: 'margin-top:18px' }, 'Enviar o link'),
+        h('p', { style: 'text-align:center;margin-top:18px' }, h('a', { href: '#/', style: 'color:#ffcc00' }, 'Voltar para o login')))));
+  }
+
+  function viewReset(user, token) {
+    document.body.classList.add('dark');
+    var p1 = passField('Nova senha (mínimo 8 caracteres)', true), p2 = passField('Repita a nova senha', true);
+    var err = h('div', { class: 'err', hidden: true });
+    app.replaceChildren(h('div', { class: 'login' },
+      h('img', { src: '../assets/img/site/logo.png', alt: 'Full Tech Dive' }),
+      h('form', { onsubmit: function (e) {
+        e.preventDefault();
+        err.hidden = true;
+        if (p1.input.value.length < 8) { err.textContent = 'A senha precisa ter pelo menos 8 caracteres.'; err.hidden = false; return; }
+        if (p1.input.value !== p2.input.value) { err.textContent = 'As duas senhas não são iguais.'; err.hidden = false; return; }
+        busy(true, 'Salvando…');
+        api('reset', { body: { user: decodeURIComponent(user), token: token, pass: p1.input.value } }).then(function () {
+          busy(false);
+          try { localStorage.setItem('ftd_user', decodeURIComponent(user)); } catch (x) {}
+          toast('Senha trocada. Entre com a nova senha.');
+          go('#/');
+        }).catch(function (e2) { busy(false); err.textContent = e2.message; err.hidden = false; });
+      } }, p1.node, p2.node, err,
+        h('button', { class: 'btn y block', type: 'submit', style: 'margin-top:18px' }, 'Salvar nova senha'))));
+  }
+
+  function viewSenha() {
+    var cur = passField('Senha atual'), p1 = passField('Nova senha (mínimo 8 caracteres)'), p2 = passField('Repita a nova senha');
+    cur.input.autocomplete = 'current-password';
+    page('Trocar minha senha', [h('div', { class: 'card' }, cur.node, p1.node, p2.node)], { back: '#/', foot: [
+      h('button', { class: 'btn line', onclick: function () { go('#/'); } }, 'Cancelar'),
+      h('button', { class: 'btn y', onclick: function () {
+        if (p1.input.value.length < 8) { toast('A nova senha precisa ter pelo menos 8 caracteres.', true); return; }
+        if (p1.input.value !== p2.input.value) { toast('As duas senhas não são iguais.', true); return; }
+        busy(true, 'Salvando…');
+        api('passwd', { body: { old: cur.input.value, pass: p1.input.value } }).then(function () { busy(false); toast('Senha trocada.'); go('#/'); })
+          .catch(function (e) { busy(false); toast(e.message, true); });
+      } }, 'Salvar')] });
   }
 
   function viewHome() {
@@ -190,8 +269,10 @@
     var warn = null;
     if (S.ping && S.ping.writable) {
       var w = S.ping.writable;
-      if (!w.assets_data || !w.produtos || !w.links || !w.docs || !w.data) {
-        warn = h('div', { class: 'err', text: 'Atenção: o servidor não deixa o painel gravar em alguma pasta. Avise o suporte antes de mexer no site.' });
+      var names = { data: 'dados do painel', assets_data: 'assets/data', produtos: 'assets/img/produtos', links: 'assets/img/links', docs: 'assets/docs' };
+      var bad = Object.keys(names).filter(function (k) { return !w[k]; }).map(function (k) { return names[k]; });
+      if (bad.length) {
+        warn = h('div', { class: 'err', text: 'Atenção: o servidor ainda não deixa o painel gravar em: ' + bad.join(', ') + '. Avise o suporte antes de mexer no site.' });
       }
     }
     page('Painel do site', [
@@ -208,6 +289,7 @@
       h('div', { class: 'card' },
         h('h2', { text: 'Instalar no celular' }),
         h('p', { class: 'muted', text: 'No menu do navegador, escolha "Adicionar à tela inicial". O painel passa a abrir como um aplicativo.' })),
+      h('a', { class: 'btn line block', href: '#/senha', style: 'margin-bottom:10px' }, 'Trocar minha senha'),
       h('button', { class: 'btn line block', onclick: function () { api('logout', { body: {} }).then(function () { S.user = null; S.csrf = ''; go('#/entrar'); }); } }, 'Sair')
     ]);
   }
@@ -453,7 +535,12 @@
 
   // ------------------------------------------------------------ rotas
   function render() {
-    if (!S.user) return viewLogin();
+    var rr = (location.hash || '#/').replace(/^#\/?/, '').split('/');
+    if (!S.user) {
+      if (rr[0] === 'esqueci') return viewForgot();
+      if (rr[0] === 'redefinir') return viewReset(rr[1] || '', rr[2] || '');
+      return viewLogin();
+    }
     if (!S.data) { page('Painel do site', h('p', { class: 'muted', text: 'Carregando…' })); return loadData().then(render, function (e) { toast(e.message, true); }); }
     var p = (location.hash || '#/').replace(/^#\/?/, '').split('/');
     var r = p[0];
@@ -466,6 +553,7 @@
       if (r === 'link') return viewLink(p[1]);
       if (r === 'catalogo') return viewCatalogo();
       if (r === 'versoes') return viewVersoes();
+      if (r === 'senha') return viewSenha();
       if (r === 'entrar') return go('#/');
     } catch (e) { toast('Algo deu errado: ' + e.message, true); }
     viewHome();

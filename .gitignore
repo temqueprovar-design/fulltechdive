@@ -18,3 +18,9 @@ admin/_data/attempts.json
 admin/_data/site.json
 admin/_data/backups/
 admin/_data/*.tmp*
+admin/_data/users.php
+admin/_data/attempts.php
+admin/_data/resets.php
+
+# Manual do cliente (gerado)
+Manual do Painel*.pdf

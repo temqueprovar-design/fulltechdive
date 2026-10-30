@@ -66,7 +66,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--y);outline-offse
 .login img{width:210px;margin:0 auto 24px;display:block}
 .login form{text-align:left}
 .pw{position:relative}
-.pw button{position:absolute;right:6px;top:6px;height:36px;border:0;background:none;color:var(--muted);cursor:pointer;padding:0 10px}
+.pw button{position:absolute;right:4px;top:4px;height:40px;width:44px;border:0;background:none;color:#667085;cursor:pointer;padding:0;display:grid;place-items:center}
+.pw input{padding-right:52px}
 .tips{font-size:.85rem;color:var(--muted);margin-top:6px}
 .hdr-row{display:flex;justify-content:space-between;align-items:center;margin:4px 0 12px}
 .hdr-row h2{margin:0;font-size:1.15rem}

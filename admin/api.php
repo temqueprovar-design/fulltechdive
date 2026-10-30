@@ -14,7 +14,23 @@ header('X-Content-Type-Options: nosniff');
 
 define('ADMIN_DIR', dirname(__FILE__));
 define('ROOT', dirname(ADMIN_DIR));
-define('DATA', ADMIN_DIR . '/_data');
+function find_data_dir() {
+    // No hosting (layout .../Web/<site>), guarda os dados na pasta "Dados", fora da área pública.
+    // Em qualquer outro lugar (ex.: computador de desenvolvimento) usa admin/_data.
+    $d = ROOT;
+    for ($i = 0; $i < 4; $i++) {
+        if (basename($d) === 'Web') {
+            $c = dirname($d) . '/Dados';
+            if (is_dir($c) && is_writable($c)) { return $c . '/ftd-admin'; }
+            break;
+        }
+        $p = dirname($d);
+        if (!$p || $p === $d) { break; }
+        $d = $p;
+    }
+    return ADMIN_DIR . '/_data';
+}
+define('DATA', find_data_dir());
 define('SITE_JSON', DATA . '/site.json');
 define('BACKUPS', DATA . '/backups');
 define('IMG_PROD', ROOT . '/assets/img/produtos');
@@ -68,6 +84,17 @@ function atomic_write($path, $content) {
         if (!@rename($tmp, $path)) { @unlink($tmp); return false; }
     }
     return true;
+}
+
+function guard_read($f) {
+    $t = @file_get_contents($f);
+    if ($t === false) { return null; }
+    $t = preg_replace('/^<\?php[^\n]*\?>\r?\n?/', '', $t);
+    return json_decode($t, true);
+}
+
+function guard_write($f, $data) {
+    return atomic_write($f, "<?php exit; ?>\n" . json_encode($data, jpretty()));
 }
 
 function ensure_dir($d) {
@@ -135,9 +162,9 @@ function require_csrf() {
 
 // ---------------------------------------------------------------- usuários e senha
 function load_users() {
-    $f = DATA . '/users.json';
+    $f = DATA . '/users.php';
     if (!is_file($f)) { return array(); }
-    $d = json_decode(file_get_contents($f), true);
+    $d = guard_read($f);
     return is_array($d) ? $d : array();
 }
 
@@ -147,11 +174,28 @@ function check_pass($pass, $hash) {
     return is_string($c) && strlen($c) > 12 && same($c, $hash);
 }
 
-function attempts_file() { return DATA . '/attempts.json'; }
+function save_users($users) {
+    return guard_write(DATA . '/users.php', $users);
+}
+
+function make_hash($pass) {
+    $salt = substr(strtr(base64_encode(md5(uniqid(mt_rand(), true), true) . md5(rnd(8), true)), '+', '.'), 0, 22);
+    return crypt($pass, '$2y$10$' . $salt);
+}
+
+function resets_file() { return DATA . '/resets.php'; }
+
+function base_url() {
+    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+    $host = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
+    $dir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+    return ($https ? 'https://' : 'http://') . $host . $dir . '/';
+}
+function attempts_file() { return DATA . '/attempts.php'; }
 
 function too_many_attempts() {
     $f = attempts_file();
-    $d = is_file($f) ? json_decode(file_get_contents($f), true) : array();
+    $d = is_file($f) ? guard_read($f) : array();
     if (!is_array($d)) { $d = array(); }
     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '?';
     $now = time();
@@ -164,7 +208,7 @@ function too_many_attempts() {
 
 function note_attempt($ok) {
     $f = attempts_file();
-    $d = is_file($f) ? json_decode(file_get_contents($f), true) : array();
+    $d = is_file($f) ? guard_read($f) : array();
     if (!is_array($d)) { $d = array(); }
     $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '?';
     $now = time();
@@ -175,7 +219,7 @@ function note_attempt($ok) {
         if ($keep) { $new[$k] = $keep; }
     }
     if ($ok) { unset($new[$ip]); } else { $new[$ip][] = $now; }
-    atomic_write($f, json_encode($new));
+    guard_write($f, $new);
 }
 
 // ---------------------------------------------------------------- dados do site
@@ -418,10 +462,61 @@ if ($action === 'logout') {
     out(array('ok' => true));
 }
 
+if ($action === 'forgot') {
+    if ($method !== 'POST') { fail('Método inválido.', 405); }
+    ensure_dir(DATA);
+    if (too_many_attempts()) { fail('Muitas tentativas. Espere 15 minutos e tente de novo.', 429); }
+    note_attempt(false);
+    $b = body();
+    $name = strtolower(clean_str(val($b, 'user'), 40));
+    $sent = false;
+    foreach (load_users() as $u) {
+        if (isset($u['user']) && strtolower($u['user']) === $name && !empty($u['email'])) {
+            $tok = rnd(20);
+            $rs = is_file(resets_file()) ? guard_read(resets_file()) : array();
+            if (!is_array($rs)) { $rs = array(); }
+            $rs[$name] = array('h' => hash('sha256', $tok), 'exp' => time() + 3600);
+            guard_write(resets_file(), $rs);
+            $link = base_url() . '#/redefinir/' . rawurlencode($name) . '/' . $tok;
+            $host = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
+            $msg = "Olá!\r\n\r\nPara criar uma nova senha do painel do site Full Tech Dive, abra o link abaixo (vale por 1 hora):\r\n\r\n" . $link . "\r\n\r\nSe você não pediu isso, pode ignorar este e-mail.\r\n";
+            $head = "From: Painel Full Tech Dive <contato@" . preg_replace('/^www\./', '', $host) . ">\r\nContent-Type: text/plain; charset=UTF-8\r\n";
+            $sent = @mail($u['email'], '=?UTF-8?B?' . base64_encode('Nova senha do painel') . '?=', $msg, $head);
+            break;
+        }
+    }
+    // resposta igual exista o usuário ou não, para não revelar quem tem acesso
+    out(array('ok' => true, 'sent' => true));
+}
+
+if ($action === 'reset') {
+    if ($method !== 'POST') { fail('Método inválido.', 405); }
+    if (too_many_attempts()) { fail('Muitas tentativas. Espere 15 minutos e tente de novo.', 429); }
+    $b = body();
+    $name = strtolower(clean_str(val($b, 'user'), 40));
+    $tok = is_string(val($b, 'token')) ? $b['token'] : '';
+    $pass = is_string(val($b, 'pass')) ? $b['pass'] : '';
+    if (strlen($pass) < 8) { fail('A senha precisa ter pelo menos 8 caracteres.'); }
+    $rs = is_file(resets_file()) ? guard_read(resets_file()) : array();
+    if (!is_array($rs) || empty($rs[$name]) || $rs[$name]['exp'] < time() || !same($rs[$name]['h'], hash('sha256', $tok))) {
+        note_attempt(false);
+        fail('Este link venceu ou já foi usado. Peça um novo em "Esqueci a senha".', 400);
+    }
+    $users = load_users();
+    $done = false;
+    foreach ($users as $i => $u) {
+        if (isset($u['user']) && strtolower($u['user']) === $name) { $users[$i]['hash'] = make_hash($pass); $done = true; }
+    }
+    if (!$done || !save_users($users)) { fail('Não consegui trocar a senha. Avise o suporte.', 500); }
+    unset($rs[$name]);
+    guard_write(resets_file(), $rs);
+    out(array('ok' => true));
+}
 $user = require_login();
 if ($action === 'ping') {
     out(array('ok' => true, 'php' => PHP_VERSION, 'gd' => function_exists('imagecreatefromjpeg'),
         'upload_max' => ini_get('upload_max_filesize'), 'post_max' => ini_get('post_max_size'),
+        'data_outside' => strpos(DATA, ADMIN_DIR) !== 0,
         'writable' => array(
             'data' => ensure_dir(DATA), 'assets_data' => is_writable(ROOT . '/assets/data'),
             'produtos' => ensure_dir(IMG_PROD), 'links' => ensure_dir(IMG_LINKS), 'docs' => ensure_dir(DOCS)
@@ -454,6 +549,23 @@ if ($action === 'backups') {
 if ($method !== 'POST') { fail('Método inválido.', 405); }
 require_csrf();
 
+if ($action === 'passwd') {
+    $b = body();
+    $old = is_string(val($b, 'old')) ? $b['old'] : '';
+    $new = is_string(val($b, 'pass')) ? $b['pass'] : '';
+    if (strlen($new) < 8) { fail('A nova senha precisa ter pelo menos 8 caracteres.'); }
+    $users = load_users();
+    $done = false;
+    foreach ($users as $i => $u) {
+        if (isset($u['user']) && $u['user'] === $user) {
+            if (!check_pass($old, val($u, 'hash'))) { fail('A senha atual não confere.', 403); }
+            $users[$i]['hash'] = make_hash($new);
+            $done = true;
+        }
+    }
+    if (!$done || !save_users($users)) { fail('Não consegui trocar a senha.', 500); }
+    out(array('ok' => true));
+}
 if ($action === 'save') {
     $b = body();
     $cur = load_site();
@@ -478,11 +590,12 @@ if ($action === 'upload') {
     if ($f['error'] !== UPLOAD_ERR_OK) { fail('Falha no envio (código ' . (int)$f['error'] . ').'); }
     if ($kind === 'product' || $kind === 'link') {
         $info = @getimagesize($f['tmp_name']);
-        if (!$info || $info[2] !== IMAGETYPE_JPEG) { fail('Envie uma foto em JPG.'); }
+        if (!$info || ($info[2] !== IMAGETYPE_JPEG && $info[2] !== IMAGETYPE_PNG)) { fail('Envie uma foto em JPG ou PNG.'); }
+        $ext = $info[2] === IMAGETYPE_PNG ? '.png' : '.jpg';
         if ($f['size'] > 4 * 1048576) { fail('A foto passou de 4 MB.'); }
         $dir = $kind === 'product' ? IMG_PROD : IMG_LINKS;
         if (!ensure_dir($dir)) { fail('Pasta de fotos sem permissão de escrita.', 500); }
-        $name = 'u-' . date('ymd') . '-' . rnd(5) . '.jpg';
+        $name = 'u-' . date('ymd') . '-' . rnd(5) . $ext;
         if (!move_uploaded_file($f['tmp_name'], $dir . '/' . $name)) { fail('Não consegui salvar a foto.', 500); }
         @chmod($dir . '/' . $name, 0644);
         out(array('ok' => true, 'file' => $kind === 'product' ? $name : 'links/' . $name));
