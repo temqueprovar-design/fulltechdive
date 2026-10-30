@@ -141,7 +141,8 @@
     var top = h('div', { class: 'top' },
       opts.back ? h('button', { class: 'back', 'aria-label': 'Voltar', onclick: function () { go(opts.back); } }, '‹') : null,
       h('h1', { text: title }),
-      !opts.back && S.user ? h('span', { class: 'who', text: S.user }) : null);
+      !opts.back && S.user ? h('span', { class: 'who', text: S.user }) : null,
+      S.user && title !== 'Ajuda' ? h('a', { class: 'helpbtn', href: '#/ajuda' + (opts.help ? '/' + opts.help : ''), 'aria-label': 'Ajuda', title: 'Ajuda' }, '?') : null);
     app.replaceChildren(top, h('div', { class: 'wrap' }, body), opts.foot ? h('div', { class: 'foot' }, h('div', { class: 'in' }, opts.foot)) : null);
     window.scrollTo(0, 0);
   }
@@ -263,6 +264,69 @@
       } }, 'Salvar')] });
   }
 
+  // ------------------------------------------------------------ ajuda (o manual dentro do painel)
+  // formato: 'p:' parágrafo, 'l:' lista (itens separados por |), 'n:' passos numerados (separados por |), 'd:' dica
+  var HELP = [
+    { id: 'entrar', t: 'Entrar, senha e usuários', b: [
+      'p:O painel é uma área só sua, protegida por senha. Tudo que você salva aparece no site na hora.',
+      'l:<b>pedro</b>: uso do dia a dia.|<b>admin</b>: reserva. Faz as mesmas coisas que o pedro. Se um deles der problema, o outro continua funcionando.',
+      'p:<b>Esqueci a senha:</b> na tela de login, toque em "Esqueci a senha", digite o usuário e toque em "Enviar o link". Chega um e-mail com um link que vale 1 hora e só funciona uma vez (olhe também o spam). Se não chegar, entre com o outro usuário ou fale com o suporte.',
+      'p:<b>Trocar a minha senha:</b> na tela inicial, toque em "Trocar minha senha". Use pelo menos 8 caracteres.',
+      'd:Depois de 8 erros de senha seguidos, o login trava por 15 minutos.'
+    ] },
+    { id: 'produtos', t: 'Produtos: criar, editar e apagar', b: [
+      'n:Toque em Produtos e escolha a linha.|Toque em "+ Produto".|Toque em "Adicionar fotos" e escolha uma ou várias fotos.|Escreva o nome do produto.|Preencha a ficha técnica, um item por linha (ex.: Peso: 173 kg). Enter cria o próximo item.|Toque em "Salvar produto". Já está no site.',
+      'l:<b>Editar:</b> toque no produto, mude e salve.|<b>Mudar a ordem:</b> use ▲ ▼ ao lado do produto na lista.|<b>Mudar de linha:</b> escolha a nova linha no campo "Linha" e salve.|<b>Apagar:</b> no fim da tela do produto, "Apagar produto". Se apagar sem querer, use "Versões anteriores".|<b>Linhas:</b> "+ Nova linha" cria; dentro da linha dá para renomear e, se estiver vazia, apagar.'
+    ] },
+    { id: 'fotos', t: 'Fotos e carrossel', b: [
+      'l:Com <b>uma foto</b>, ela aparece parada. Com <b>duas ou mais</b>, o site faz um carrossel que passa sozinho e com o dedo.|A <b>primeira foto é a capa</b>. Use ◀ ▶ para mudar a ordem e ✕ para tirar.|Pode enviar fotos grandes do celular: o painel reduz sozinho antes de enviar.|Aceita JPG e PNG. No máximo 12 fotos por produto.',
+      'd:Foto na horizontal, fundo limpo, boa luz e o equipamento inteiro. Primeiro a foto principal; depois os detalhes.'
+    ] },
+    { id: 'links', t: 'Links úteis', b: [
+      'p:É a seção "Links úteis" da página inicial.',
+      'l:"+ Link" cria um novo: nome, endereço do site e logo.|Toque num link para editar ou apagar. ▲ ▼ mudam a ordem.|Para a logo, prefira PNG com fundo transparente, bem nítida.'
+    ] },
+    { id: 'catalogo', t: 'Catálogo em PDF', b: [
+      'n:Toque em "Catálogo em PDF".|Toque em "Trocar o PDF" e escolha o arquivo.|Ajuste o título (texto do botão "Baixar catálogo") e o ano.|Toque em "Salvar".',
+      'p:O site mostra um catálogo só, o mais recente. Tamanho máximo: 50 MB.'
+    ] },
+    { id: 'versoes', t: 'Errei, como volto atrás?', b: [
+      'p:A cada salvamento o painel guarda a versão de antes (as últimas 40). Vá em "Versões anteriores", escolha a data e a hora e toque em "Restaurar". A versão atual também fica guardada.'
+    ] },
+    { id: 'limites', t: 'O que o painel faz e o que não faz', b: [
+      'p:<b>Pode:</b> produtos, fotos, ficha técnica, ordem, linhas, links, catálogo em PDF, versões anteriores e sua senha.',
+      'p:<b>Não pode (peça ao suporte):</b> textos das páginas (A empresa, Contato, página inicial), logo e cores do site, endereço e telefones, foto ou vídeo do topo, criar usuários ou mudar o e-mail de recuperação, e as publicações do Instagram.'
+    ] },
+    { id: 'avisos', t: 'Avisos que podem aparecer', b: [
+      'l:<b>Usuário ou senha incorretos:</b> confira, use o olho para ver a senha ou toque em "Esqueci a senha".|<b>Outra pessoa alterou o site enquanto você editava:</b> recarregue a página e refaça a alteração.|<b>Sessão expirada:</b> entre de novo.|<b>Envie uma foto em JPG ou PNG / Arquivo grande demais:</b> escolha outra foto; PDF até 50 MB.|<b>Sem conexão com a internet:</b> confira o Wi-Fi ou os dados.|<b>Não consegui gravar no servidor:</b> avise o suporte e diga o que estava fazendo.',
+      'd:Se algo parecer estranho, não insista: tire um print da tela e envie ao suporte.'
+    ] }
+  ];
+
+  function helpBody(lines) {
+    return lines.map(function (ln) {
+      var k = ln.slice(0, 2), t = ln.slice(2), el;
+      if (k === 'p:') { el = h('p'); el.innerHTML = t; return el; }
+      if (k === 'd:') { return h('div', { class: 'ok', style: 'background:#fff9e3;border-color:#ffe08a;color:#5b4a00', text: '💡 ' + t }); }
+      el = h(k === 'n:' ? 'ol' : 'ul', { class: 'help-list' });
+      t.split('|').forEach(function (it) { var li = h('li'); li.innerHTML = it; el.appendChild(li); });
+      return el;
+    });
+  }
+
+  function viewAjuda(open) {
+    page('Ajuda', [
+      h('p', { class: 'muted', style: 'margin-top:0', text: 'O manual do painel, aqui dentro. Toque em um assunto para abrir.' }),
+      HELP.map(function (s) {
+        var d = h('details', { class: 'help' }, h('summary', { text: s.t }), h('div', { class: 'help-body' }, helpBody(s.b)));
+        if (s.id === open) d.open = true;
+        return d;
+      }),
+      h('a', { class: 'btn y block', style: 'margin-top:14px', href: 'manual.pdf', target: '_blank', rel: 'noopener' }, 'Baixar o manual em PDF'),
+      h('p', { class: 'tips', style: 'text-align:center', text: 'Dúvida que não está aqui? Fale com o suporte.' })
+    ], { back: '#/' });
+  }
+
   function viewHome() {
     var d = S.data, nProd = 0;
     d.categorias.forEach(function (c) { nProd += c.products.length; });
@@ -281,7 +345,8 @@
         tile('📦', 'Produtos', nProd + ' produtos em ' + d.categorias.length + ' linhas', '#/produtos'),
         tile('🔗', 'Links', d.links.length + ' links', '#/links'),
         tile('📄', 'Catálogo em PDF', d.catalogo && d.catalogo.file ? d.catalogo.title : 'Nenhum', '#/catalogo'),
-        tile('🕘', 'Versões anteriores', 'Voltar atrás se errar', '#/versoes')),
+        tile('🕘', 'Versões anteriores', 'Voltar atrás se errar', '#/versoes'),
+        tile('❓', 'Ajuda', 'Manual do painel', '#/ajuda')),
       h('div', { class: 'card', style: 'margin-top:16px' },
         h('h2', { text: 'Ver o site' }),
         h('p', { class: 'muted', text: 'Tudo que você salva aparece no site na hora.' }),
@@ -415,7 +480,7 @@
           c.products.splice(+idx, 1);
           saveAll('Produto apagado.').then(function (ok) { if (ok) go('#/linha/' + slug); });
         } }, 'Apagar produto'))
-      ], { back: '#/linha/' + slug, foot: foot });
+      ], { back: '#/linha/' + slug, foot: foot, help: 'produtos' });
     }
     function focusLine(i) {
       setTimeout(function () { var l = app.querySelectorAll('.line-item input')[i]; if (l) l.focus(); }, 30);
@@ -463,7 +528,7 @@
           d.links.splice(+idx, 1);
           saveAll('Link apagado.').then(function (ok) { if (ok) go('#/links'); });
         } }, 'Apagar link'))
-      ], { back: '#/links', foot: [
+      ], { back: '#/links', help: 'links', foot: [
         h('button', { class: 'btn line', onclick: function () { go('#/links'); } }, 'Cancelar'),
         h('button', { class: 'btn y', onclick: function () {
           if (!draft.name.trim() || !draft.url.trim()) { toast('Preencha o nome e o endereço.', true); return; }
@@ -502,7 +567,7 @@
         max ? h('p', { class: 'tips', text: 'Tamanho máximo do arquivo: ' + max + '.' }) : null,
         h('label', { class: 'f', text: 'Título (aparece no botão de baixar)' }), title,
         h('label', { class: 'f', text: 'Ano' }), year
-      ], { back: '#/', foot: [
+      ], { back: '#/', help: 'catalogo', foot: [
         h('button', { class: 'btn line', onclick: function () { go('#/'); } }, 'Cancelar'),
         h('button', { class: 'btn y', onclick: function () {
           if (!draft.file) { toast('Envie o PDF primeiro.', true); return; }
@@ -554,6 +619,7 @@
       if (r === 'catalogo') return viewCatalogo();
       if (r === 'versoes') return viewVersoes();
       if (r === 'senha') return viewSenha();
+      if (r === 'ajuda') return viewAjuda(p[1]);
       if (r === 'entrar') return go('#/');
     } catch (e) { toast('Algo deu errado: ' + e.message, true); }
     viewHome();
