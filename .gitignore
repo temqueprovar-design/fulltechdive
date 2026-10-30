@@ -11,3 +11,10 @@ node_modules/
 
 # Backup do site original (baixado via FTP)
 backup/
+
+# Painel: dados e senhas ficam só no servidor/computador
+admin/_data/users.json
+admin/_data/attempts.json
+admin/_data/site.json
+admin/_data/backups/
+admin/_data/*.tmp*

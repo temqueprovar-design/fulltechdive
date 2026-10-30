@@ -171,7 +171,7 @@ if (docsList) {
     body.appendChild(el('p', 'doc__meta', 'PDF · ' + c.size + ' · ' + c.year));
     const btns = el('div', 'doc__btns');
     const dl = link(docUrl(c), 'btn btn--primary btn--sm', 'Baixar PDF', true);
-    dl.setAttribute('download', c.file);
+    dl.setAttribute('download', c.title + '.pdf');
     btns.append(dl, link(docUrl(c), 'btn btn--ghost btn--sm', 'Abrir', true));
     body.appendChild(btns);
     card.append(cover, body);
@@ -198,10 +198,46 @@ if (productsEl) {
   const title = document.getElementById('cat-title');
   const count = document.getElementById('cat-count');
 
+  // fotos do produto: uma foto fica parada; duas ou mais viram carrossel (passa sozinho e com o dedo)
+function gallery(p, alt) {
+  const list = (p.images && p.images.length) ? p.images : (p.image ? [p.image] : []);
+  if (list.length < 2) return img(IMG + (list[0] || ''), alt);
+  const wrap = el('div', 'car');
+  const track = el('div', 'car__track');
+  list.forEach(f => track.appendChild(img(IMG + f, alt)));
+  const dots = el('div', 'car__dots');
+  const cur = () => Math.round(track.scrollLeft / (track.clientWidth || 1));
+  const go = i => track.scrollTo({ left: ((i + list.length) % list.length) * track.clientWidth, behavior: 'smooth' });
+  list.forEach((_, i) => {
+    const d = el('button', 'car__dot');
+    d.type = 'button';
+    d.setAttribute('aria-label', 'Foto ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dots.appendChild(d);
+  });
+  const mk = (cls, txt, label, step) => {
+    const b = el('button', 'car__nav ' + cls, txt);
+    b.type = 'button';
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', () => go(cur() + step));
+    return b;
+  };
+  const mark = () => { const c = cur(); [...dots.children].forEach((d, i) => d.classList.toggle('on', i === c)); };
+  track.addEventListener('scroll', mark, { passive: true });
+  wrap.append(track, mk('car__prev', '‹', 'Foto anterior', -1), mk('car__next', '›', 'Próxima foto', 1), dots);
+  mark();
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let hold = false;
+    ['pointerenter', 'touchstart', 'focusin'].forEach(ev => wrap.addEventListener(ev, () => { hold = true; }, { passive: true }));
+    ['pointerleave', 'focusout'].forEach(ev => wrap.addEventListener(ev, () => { hold = false; }));
+    setInterval(() => { if (!hold && !document.hidden) go(cur() + 1); }, 4500);
+  }
+  return wrap;
+}
   function card(p) {
     const c = el('article', 'pcard');
     const fig = el('div', 'pcard__img');
-    fig.appendChild(img(IMG + p.image, p.name || ''));
+    fig.appendChild(gallery(p, p.name || ''));
     c.appendChild(fig);
     if (p.name || p.details.length) {
       const body = el('div', 'pcard__body');

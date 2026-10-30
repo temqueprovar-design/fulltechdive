@@ -38,6 +38,27 @@ if (latest) {
   });
 }
 
+// ---------- links (vêm do painel; se não carregar, fica o que está no HTML) ----------
+const LINKS = window.LINKS || [];
+const brandsBox = document.querySelector('.brands');
+if (brandsBox && LINKS.length) {
+  brandsBox.replaceChildren(...LINKS.map(l => {
+    const a = el('a', 'brand');
+    a.href = l.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    if (l.image) {
+      const im = document.createElement('img');
+      im.src = 'assets/img/' + l.image;
+      im.alt = '';
+      im.loading = 'lazy';
+      a.appendChild(im);
+    }
+    a.append(el('span', null, l.name), el('small', null, 'mais info →'));
+    return a;
+  }));
+}
+
 // ---------- números (vêm dos dados) ----------
 const totalProds = CATEGORIAS.reduce((n, c) => n + c.products.length, 0);
 const brandCount = document.querySelectorAll('.brand').length;
