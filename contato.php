@@ -12,7 +12,7 @@ header('Cache-Control: no-store');
 define('DEST', 'contato@fulltechdive.com.br');
 
 function done($ok, $msg, $code) {
-    if ($code != 200) { http_response_code($code); }
+    // sempre HTTP 200: o servidor (IIS) troca o corpo das respostas de erro, e o site precisa ler a mensagem
     echo json_encode($ok ? array('ok' => true) : array('ok' => false, 'error' => $msg));
     exit;
 }
