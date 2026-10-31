@@ -8,39 +8,42 @@
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=Inter:wght@100;200;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/home2.css?v=13">
+<link rel="stylesheet" href="assets/inner.css?v=2">
 </head>
 <body data-page="contato">
 
 <div id="site-header"></div>
 
 <main>
-  <section class="pagehead">
-    <div class="wrap">
+  <section class="phead">
+    <div class="container">
       <p class="eyebrow">Contato</p>
       <h1>Entre em contato conosco</h1>
       <p class="lead">Conte o que você precisa e responderemos o mais rápido possível.</p>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap two">
+  <section class="sec sec--s">
+    <div class="container contact-g">
       <div>
-        <ul class="contact">
+        <ul class="cinfo">
           <li><strong>Endereço</strong>Rua Latino Coelho, 22ª<br>Penha, Rio de Janeiro - RJ · CEP: 21070-720</li>
           <li><strong>Telefone</strong><a href="tel:+552122707847">(21) 2270-7847</a></li>
           <li><strong>Celular / WhatsApp</strong><a href="tel:+5521988350209">(21) 98835-0209</a></li>
           <li><strong>E-mail</strong><a href="mailto:contato@fulltechdive.com.br">contato@fulltechdive.com.br</a></li>
+          <li><strong>Redes sociais</strong><a href="https://www.instagram.com/fulltechdive/" target="_blank" rel="noopener">Instagram @fulltechdive</a> · <a href="https://www.facebook.com/fulltechdive/" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
-        <a class="btn btn--whats" href="https://wa.me/5521988350209" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <a class="btn btn--y" href="https://wa.me/5521988350209?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Full%20Tech%20Dive." target="_blank" rel="noopener">Chamar no WhatsApp</a>
       </div>
-      <!-- Temporário: abre o e-mail do visitante. Depois trocar por envio via servidor. -->
-      <form class="form" id="form-contato">
-        <label>Nome<input name="nome" required autocomplete="name"></label>
-        <label>E-mail<input type="email" name="email" required autocomplete="email"></label>
-        <label>Mensagem<textarea name="msg" rows="5" required></textarea></label>
-        <button class="btn btn--primary" type="submit">Enviar</button>
+      <form class="form" id="form-contato" novalidate>
+        <label>Nome<input name="nome" required autocomplete="name" maxlength="100"></label>
+        <label>E-mail<input type="email" name="email" required autocomplete="email" maxlength="150"></label>
+        <label>Mensagem<textarea name="msg" rows="5" required maxlength="3000"></textarea></label>
+        <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form__msg" id="form-status" hidden role="status"></div>
+        <button class="btn btn--y" type="submit">Enviar mensagem</button>
       </form>
     </div>
   </section>
@@ -48,6 +51,6 @@
 
 <div id="site-footer"></div>
 
-<script src="assets/main.js?v=12"></script>
+<script src="assets/site.js?v=2"></script>
 </body>
 </html>
