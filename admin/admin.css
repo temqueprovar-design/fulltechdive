@@ -86,3 +86,5 @@ details.help[open] summary::after{content:'−'}
 .help-body{padding:0 16px 14px;font-size:.95rem}
 .help-list{margin:6px 0 6px 18px;padding:0}
 .help-list li{margin:5px 0}
+body.dark input{color:#14181d;-webkit-text-fill-color:#14181d}
+body.dark input::placeholder{color:#8a93a0}
