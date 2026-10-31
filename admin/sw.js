@@ -1,6 +1,6 @@
 /* Service worker do painel: guarda só a "casca" para abrir rápido. Nada de dados. */
-var V = 'ftd-admin-v6';
-var SHELL = ['./', 'index.html', 'admin.css?v=5', 'admin.js?v=5', 'icons/icon-192.png'];
+var V = 'ftd-admin-v7';
+var SHELL = ['./', 'index.html', 'admin.css?v=5', 'admin.js?v=6', 'icons/icon-192.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(V).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); }));
 });

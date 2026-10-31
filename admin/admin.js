@@ -276,7 +276,7 @@
     ] },
     { id: 'produtos', t: 'Produtos: criar, editar e apagar', b: [
       'n:Toque em Produtos e escolha a linha.|Toque em "+ Produto".|Toque em "Adicionar fotos" e escolha uma ou várias fotos.|Escreva o nome do produto.|Preencha a ficha técnica, um item por linha (ex.: Peso: 173 kg). Enter cria o próximo item.|Toque em "Salvar produto". Já está no site.',
-      'l:<b>Editar:</b> toque no produto, mude e salve.|<b>Mudar a ordem:</b> use ▲ ▼ ao lado do produto na lista.|<b>Mudar de linha:</b> escolha a nova linha no campo "Linha" e salve.|<b>Apagar:</b> no fim da tela do produto, "Apagar produto". Se apagar sem querer, use "Versões anteriores".|<b>Linhas:</b> "+ Nova linha" cria; dentro da linha dá para renomear e, se estiver vazia, apagar.'
+      'l:<b>Editar:</b> toque no produto, mude e salve.|<b>Mudar a ordem:</b> use ▲ ▼ ao lado do produto na lista.|<b>Mudar de linha:</b> escolha a nova linha no campo "Linha" e salve.|<b>Apagar:</b> no fim da tela do produto, "Apagar produto". Se apagar sem querer, use "Versões anteriores".|<b>Linhas:</b> "+ Nova linha" cria; dentro da linha dá para renomear e, se estiver vazia, apagar. Na lista de linhas, ▲ ▼ mudam a ordem em que elas aparecem no site.'
     ] },
     { id: 'fotos', t: 'Fotos e carrossel', b: [
       'l:Com <b>uma foto</b>, ela aparece parada. Com <b>duas ou mais</b>, o site faz um carrossel que passa sozinho e com o dedo.|A <b>primeira foto é a capa</b>. Use ◀ ▶ para mudar a ordem e ✕ para tirar.|Pode enviar fotos grandes do celular: o painel reduz sozinho antes de enviar.|Aceita JPG e PNG. No máximo 12 fotos por produto.',
@@ -375,9 +375,12 @@
       d.categorias.map(function (c, i) {
         return h('div', { class: 'item', onclick: function () { go('#/linha/' + c.slug); } },
           h('div', { class: 'grow' }, h('b', { text: c.title }), h('span', { text: c.products.length + (c.products.length === 1 ? ' produto' : ' produtos') })),
+          h('div', { class: 'row', onclick: function (e) { e.stopPropagation(); } },
+            h('button', { class: 'btn line', style: 'min-height:40px;padding:0 12px', 'aria-label': 'Subir', onclick: function () { if (move(d.categorias, i, -1)) saveAll('Ordem alterada.').then(render); } }, '▲'),
+            h('button', { class: 'btn line', style: 'min-height:40px;padding:0 12px', 'aria-label': 'Descer', onclick: function () { if (move(d.categorias, i, 1)) saveAll('Ordem alterada.').then(render); } }, '▼')),
           h('span', { class: 'go' }, '›'));
       })
-    ], { back: '#/' });
+    ], { back: '#/', help: 'produtos' });
   }
 
   function viewLinha(slug) {
