@@ -275,8 +275,8 @@
       'd:Depois de 8 erros de senha seguidos, o login trava por 15 minutos.'
     ] },
     { id: 'produtos', t: 'Produtos: criar, editar e apagar', b: [
-      'n:Toque em Produtos e escolha a linha.|Toque em "+ Produto".|Toque em "Adicionar fotos" e escolha uma ou várias fotos.|Escreva o nome do produto.|Preencha a ficha técnica, um item por linha (ex.: Peso: 173 kg). Enter cria o próximo item.|Toque em "Salvar produto". Já está no site.',
-      'l:<b>Editar:</b> toque no produto, mude e salve.|<b>Mudar a ordem:</b> use ▲ ▼ ao lado do produto na lista.|<b>Mudar de linha:</b> escolha a nova linha no campo "Linha" e salve.|<b>Apagar:</b> no fim da tela do produto, "Apagar produto". Se apagar sem querer, use "Versões anteriores".|<b>Linhas:</b> "+ Nova linha" cria; dentro da linha dá para renomear e, se estiver vazia, apagar. Na lista de linhas, ▲ ▼ mudam a ordem em que elas aparecem no site.'
+      'n:Toque em Produtos e escolha a categoria.|Toque em "+ Produto".|Toque em "Adicionar fotos" e escolha uma ou várias fotos.|Escreva o nome do produto.|Preencha a ficha técnica, um item por linha (ex.: Peso: 173 kg). Enter cria o próximo item.|Toque em "Salvar produto". Já está no site.',
+      'l:<b>Editar:</b> toque no produto, mude e salve.|<b>Mudar a ordem:</b> use ▲ ▼ ao lado do produto na lista.|<b>Mudar de categoria:</b> escolha a nova categoria no campo "Categoria" e salve.|<b>Apagar:</b> no fim da tela do produto, "Apagar produto". Se apagar sem querer, use "Versões anteriores".|<b>Categorias:</b> "+ Nova categoria" cria; dentro da categoria dá para renomear e, se estiver vazia, apagar. Na lista de categorias, ▲ ▼ mudam a ordem em que elas aparecem no site.'
     ] },
     { id: 'fotos', t: 'Fotos e carrossel', b: [
       'l:Com <b>uma foto</b>, ela aparece parada. Com <b>duas ou mais</b>, o site faz um carrossel que passa sozinho e com o dedo.|A <b>primeira foto é a capa</b>. Use ◀ ▶ para mudar a ordem e ✕ para tirar.|Pode enviar fotos grandes do celular: o painel reduz sozinho antes de enviar.|Aceita JPG e PNG. No máximo 12 fotos por produto.',
@@ -294,7 +294,7 @@
       'p:A cada salvamento o painel guarda a versão de antes (as últimas 40). Vá em "Versões anteriores", escolha a data e a hora e toque em "Restaurar". A versão atual também fica guardada.'
     ] },
     { id: 'limites', t: 'O que o painel faz e o que não faz', b: [
-      'p:<b>Pode:</b> produtos, fotos, ficha técnica, ordem, linhas, links, catálogo em PDF, versões anteriores e sua senha.',
+      'p:<b>Pode:</b> produtos, fotos, ficha técnica, ordem, categorias, links, catálogo em PDF, versões anteriores e sua senha.',
       'p:<b>Não pode (peça ao suporte):</b> textos das páginas (A empresa, Contato, página inicial), logo e cores do site, endereço e telefones, foto ou vídeo do topo, criar usuários ou mudar o e-mail de recuperação, e as publicações do Instagram.'
     ] },
     { id: 'avisos', t: 'Avisos que podem aparecer', b: [
@@ -342,7 +342,7 @@
     page('Painel do site', [
       warn,
       h('div', { class: 'tiles' },
-        tile('📦', 'Produtos', nProd + ' produtos em ' + d.categorias.length + ' linhas', '#/produtos'),
+        tile('📦', 'Produtos', nProd + ' produtos em ' + d.categorias.length + ' categorias', '#/produtos'),
         tile('🔗', 'Links', d.links.length + ' links', '#/links'),
         tile('📄', 'Catálogo em PDF', d.catalogo && d.catalogo.file ? d.catalogo.title : 'Nenhum', '#/catalogo'),
         tile('🕘', 'Versões anteriores', 'Voltar atrás se errar', '#/versoes'),
@@ -365,13 +365,13 @@
   function viewProdutos() {
     var d = S.data;
     page('Produtos', [
-      h('div', { class: 'hdr-row' }, h('h2', { text: 'Linhas de produtos' }),
+      h('div', { class: 'hdr-row' }, h('h2', { text: 'Categorias de produtos' }),
         h('button', { class: 'btn line', onclick: function () {
-          var t = prompt('Nome da nova linha de produtos:');
+          var t = prompt('Nome da nova categoria de produtos:');
           if (!t || !t.trim()) return;
           d.categorias.push({ slug: '', title: t.trim(), cover: '', products: [] });
-          saveAll('Linha criada.').then(function () { render(); });
-        } }, '+ Nova linha')),
+          saveAll('Categoria criada.').then(function () { render(); });
+        } }, '+ Nova categoria')),
       d.categorias.map(function (c, i) {
         return h('div', { class: 'item', onclick: function () { go('#/linha/' + c.slug); } },
           h('div', { class: 'grow' }, h('b', { text: c.title }), h('span', { text: c.products.length + (c.products.length === 1 ? ' produto' : ' produtos') })),
@@ -399,20 +399,20 @@
             h('button', { class: 'btn line', style: 'min-height:40px;padding:0 12px', 'aria-label': 'Descer', onclick: function () { if (move(c.products, i, 1)) saveAll('Ordem alterada.').then(render); } }, '▼')));
       }),
       h('div', { class: 'card', style: 'margin-top:20px' },
-        h('h2', { text: 'Esta linha' }),
+        h('h2', { text: 'Esta categoria' }),
         h('div', { class: 'row wrap2', style: 'margin-top:10px' },
           h('button', { class: 'btn line', onclick: function () {
-            var t = prompt('Novo nome da linha:', c.title);
+            var t = prompt('Novo nome da categoria:', c.title);
             if (!t || !t.trim()) return;
             c.title = t.trim();
             saveAll('Nome alterado.').then(render);
           } }, 'Renomear'),
           h('button', { class: 'btn red', onclick: function () {
-            if (c.products.length) { alert('Para apagar a linha, apague ou mude os produtos dela antes.'); return; }
-            if (!confirm('Apagar a linha "' + c.title + '"?')) return;
+            if (c.products.length) { alert('Para apagar a categoria, apague ou mude os produtos dela antes.'); return; }
+            if (!confirm('Apagar a categoria "' + c.title + '"?')) return;
             S.data.categorias = S.data.categorias.filter(function (x) { return x !== c; });
-            saveAll('Linha apagada.').then(function () { go('#/produtos'); });
-          } }, 'Apagar linha')))
+            saveAll('Categoria apagada.').then(function () { go('#/produtos'); });
+          } }, 'Apagar categoria')))
     ], { back: '#/produtos' });
   }
 
@@ -473,7 +473,7 @@
         h('div', { class: 'photos' }, photos, addPhoto),
         h('p', { class: 'tips', text: draft.images.length > 1 ? 'Com mais de uma foto, o site passa elas como carrossel. A primeira é a capa. Use ◀ ▶ para mudar a ordem.' : 'Pode colocar uma foto só. Se colocar mais, o site passa como carrossel.' }),
         h('label', { class: 'f', text: 'Nome do produto' }), name,
-        h('label', { class: 'f', text: 'Linha' }), sel,
+        h('label', { class: 'f', text: 'Categoria' }), sel,
         h('label', { class: 'f', text: 'Ficha técnica' }),
         h('p', { class: 'tips', style: 'margin:0 0 8px', text: 'Um item por linha, como "Peso: 173 kg". Aperte Enter para criar o próximo.' }),
         lines,

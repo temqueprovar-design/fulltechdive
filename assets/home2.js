@@ -83,8 +83,8 @@ FEATURED.map(s => CATEGORIAS.find(c => c.slug === s)).filter(Boolean).forEach(ca
   const body = el('div', 'p-body');
   const desc = p.details.length
     ? p.details.slice(0, 3).join(' · ')
-    : cat.products.length + (cat.products.length === 1 ? ' item' : ' itens') + ' nesta linha';
-  body.append(el('p', 'p-tag', cat.title), el('h3', 'p-name', p.name || cat.title), el('p', 'p-desc', desc), el('span', 'p-cta', 'Ver linha completa →'));
+    : cat.products.length + (cat.products.length === 1 ? ' item' : ' itens') + ' nesta categoria';
+  body.append(el('p', 'p-tag', cat.title), el('h3', 'p-name', p.name || cat.title), el('p', 'p-desc', desc), el('span', 'p-cta', 'Ver categoria completa →'));
 
   a.append(fig, body);
   li.appendChild(a);
